@@ -1,12 +1,16 @@
 package gov.naco.soch.dashboard.service;
 
-//import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.repository.DashBoardOverViewRepo;
 
 @Service
@@ -17,9 +21,11 @@ public class OverViewService {
 	DashBoardOverViewRepo dashBoardOverViewRepo;
 	
 
-//	private static final Logger logger = Logger.getLogger(OverViewService.class.getName());
-
+	private static final Logger logger = Logger.getLogger(OverViewService.class.getName());
+	
+	
 	public Integer loginRealTimeCount() {  
+		logger.info("DashBoardService Class -- Login Real Time Count");
 		return dashBoardOverViewRepo.loginRealTimeCount();
 	}
 	
@@ -81,6 +87,24 @@ public class OverViewService {
 	public Integer tiBridgePopulationState30Days(Integer stateId) {
 		return dashBoardOverViewRepo.tiBridgePopulationState30Days(stateId);
 		
+	}
+	
+	public List<FacilityDTO> loginDataStateWise30Days(){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginDataStateWise30Days();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		    }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+
+		    return facilityDTOList;
 	}
 	
 }

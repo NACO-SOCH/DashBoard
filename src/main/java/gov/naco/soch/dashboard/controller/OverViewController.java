@@ -1,5 +1,7 @@
 package gov.naco.soch.dashboard.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.dashboard.service.OverViewService;
 
 @RestController
 @RequestMapping("/overview")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:4200","*"}, allowedHeaders = "*")
 public class OverViewController {
 	
 	@Autowired
@@ -177,5 +180,17 @@ public class OverViewController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    
+	@GetMapping("/loginDataStateWise30Days")
+	public ResponseEntity<List<FacilityDTO>> loginDataStateWise30Days(){
+		List<FacilityDTO> result;
+		try {
+			result = overViewService.loginDataStateWise30Days();
+		}catch(Exception e){
+			return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
 
 }

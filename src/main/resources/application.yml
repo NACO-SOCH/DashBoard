@@ -9,6 +9,9 @@ spring:
       generate-ddl: false
       open-in-view: false
       show-sql: false
+      web:
+         cors:
+            allowed-origins: "*"
       hibernate:
          ddl-auto: none
       properties:

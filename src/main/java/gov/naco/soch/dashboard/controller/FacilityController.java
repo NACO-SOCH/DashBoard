@@ -15,7 +15,7 @@ import gov.naco.soch.dashboard.service.FacilityService;
 
 @RestController
 @RequestMapping("/facility")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:4200","*"}, allowedHeaders = "*")
 public class FacilityController {
 	
 	@Autowired
@@ -48,6 +48,17 @@ public class FacilityController {
 		List<FacilityDTO> result;
 		try {
 			result = facilityService.stateICTCCount();
+		}catch(Exception e){
+			return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/facilityUserLoginData15Days")
+	public ResponseEntity<List<FacilityDTO>> facilityUserLoginData15Days(){
+		List<FacilityDTO> result;
+		try {
+			result = facilityService.facilityUserLoginData15Days();
 		}catch(Exception e){
 			return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
