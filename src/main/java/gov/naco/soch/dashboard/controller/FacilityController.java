@@ -66,4 +66,88 @@ public class FacilityController {
 	}
 	
 	
+	//-------------------------//
+	
+	@GetMapping("/totalTICoreCount")
+    public ResponseEntity<Integer> getTotalTICoreCount() {
+        try {
+            Integer result = facilityService.getTotalTICoreCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalTICoreStateWiseCount")
+    public ResponseEntity<List<FacilityDTO>> getTotalTICoreStateWiseCount() {
+        try {
+            List<FacilityDTO> result = facilityService.getTotalTICoreStateWiseCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalTIBridgeCount")
+    public ResponseEntity<Integer> getTotalTIBridgeCount() {
+        try {
+            Integer result = facilityService.getTotalTIBridgeCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalTIBridgeStateWiseCount")
+    public ResponseEntity<List<FacilityDTO>> getTotalTIBridgeStateWiseCount() {
+        try {
+            List<FacilityDTO> result = facilityService.getTotalTIBridgeStateWiseCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalOSTCount")
+    public ResponseEntity<Integer> getTotalOSTCount() {
+        try {
+            Integer result = facilityService.getTotalOSTCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalOSTStateWiseCount")
+    public ResponseEntity<List<FacilityDTO>> getTotalOSTStateWiseCount() {
+        try {
+            List<FacilityDTO> result = facilityService.getTotalOSTStateWiseCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalLWSCount")
+    public ResponseEntity<Integer> getTotalLWSCount() {
+        try {
+            Integer result = facilityService.getTotalLWSCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/totalLWSStateWiseCount")
+    public ResponseEntity<List<FacilityDTO>> getTotalLWSStateWiseCount() {
+        try {
+            List<FacilityDTO> result = facilityService.getTotalLWSStateWiseCount();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+	
+	
+	
 }

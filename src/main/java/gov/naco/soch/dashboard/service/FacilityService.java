@@ -95,5 +95,89 @@ public class FacilityService {
 		    }
 		    return facilityDTOList;
 	}
+	
+	//----------------------------//
+	public Integer getTotalTICoreCount() {
+        return dashBoardFacilityRepo.getTotalTICoreCount();
+    }
+
+    public List<FacilityDTO> getTotalTICoreStateWiseCount() {
+        List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.getTotalTICoreStateWiseCount();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+
+    }
+
+    public Integer getTotalTIBridgeCount() {
+        return dashBoardFacilityRepo.getTotalTIBridgeCount();
+    }
+
+    public List<FacilityDTO> getTotalTIBridgeStateWiseCount() {
+        List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.getTotalOSTStateWiseCount();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+    }
+
+    public Integer getTotalOSTCount() {
+        return dashBoardFacilityRepo.getTotalOSTCount();
+    }
+
+    public List<FacilityDTO> getTotalOSTStateWiseCount() {
+        List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.getTotalOSTStateWiseCount();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+
+    }
+
+    public Integer getTotalLWSCount() {
+        return dashBoardFacilityRepo.getTotalLWSCount();
+    }
+
+    public List<FacilityDTO> getTotalLWSStateWiseCount() {
+        List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.getTotalLWSStateWiseCount();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+
+    }
 
 }
