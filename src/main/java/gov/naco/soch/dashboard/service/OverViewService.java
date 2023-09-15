@@ -45,53 +45,50 @@ public class OverViewService {
 		return dashBoardOverViewRepo.beneficiaryWiseDispensation();
 	}
 	
-	public Integer artDispensationLast1Month() {
-		return dashBoardOverViewRepo.artDispensationLast1Month();
+	public Integer artDispensationCurrentFinancialYear() {
+		return dashBoardOverViewRepo.artDispensationCurrentFinancialYear();
 	}
 	
-	public Integer artDispensationStateLast1Month(Integer stateId) {
-		return dashBoardOverViewRepo.artDispensationStateLast1Month(stateId);
+	public Integer artDispensationStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.artDispensationStateCurrentFinancialYear(stateId);
 	}
 	
-	public Integer ictcTest1Month() {
-		return dashBoardOverViewRepo.ictcTest1Month();
+	public Integer ictcTestCurrentFinancialYear() {
+		return dashBoardOverViewRepo.ictcTestCurrentFinancialYear();
 	}
 	
-	public Integer ictcTestState1Month(Integer stateId) {
-		return dashBoardOverViewRepo.ictcTestState1Month(stateId);
+	public Integer ictcTestStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.ictcTestStateCurrentFinancialYear(stateId);
 	}
 	
-	public Integer vlTest1Month() {
-		return dashBoardOverViewRepo.vlTest30Days();
+	public Integer vlTestCurrentFinancialYear() {
+		return dashBoardOverViewRepo.vlTestCurrentFinancialYear();
 	}
 	
-	public Integer vlTestState1Month(Integer stateId) {
-		return dashBoardOverViewRepo.vlTestState30Days(stateId);
+	public Integer vlTestStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.vlTestStateCurrentFinancialYear(stateId);
 	}
 	
 	
-	public Integer getTiCoreLast30Days() {
-		 return dashBoardOverViewRepo.tiCoreLast30Days();
+	public Integer getTiCoreCurrentFinancialYear() {
+		 return dashBoardOverViewRepo.tiCoreLastCurrentFinancialYear();
 	}
 
-	public Integer getTiBridgePopulation30Days() {
-		return dashBoardOverViewRepo.tiBridgePopulation30Days();
-		
+	public Integer getTiBridgePopulationCurrentFinancialYear() {
+		return dashBoardOverViewRepo.tiBridgePopulationCurrentFinancialYear();
 	}
 	
-	public Integer tiCorStateeLast30Days(Integer stateId) {
-		return dashBoardOverViewRepo.tiCorStateeLast30Days(stateId);
-		
+	public Integer tiCoreStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.tiCoreStateCurrentFinancialYear(stateId);
 	}
 	
-	public Integer tiBridgePopulationState30Days(Integer stateId) {
-		return dashBoardOverViewRepo.tiBridgePopulationState30Days(stateId);
-		
+	public Integer tiBridgePopulationStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.tiBridgePopulationStateCurrentFinancialYear(stateId);	
 	}
 	
-	public List<FacilityDTO> loginDataStateWise30Days(){
+	public List<FacilityDTO> loginDataStateWise15Days(){
 		
-		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginDataStateWise30Days();
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginDataStateWise15Days();
 		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
 		  try {
 		    for (Object[] row : dashBoardOverviewList) {
@@ -106,5 +103,37 @@ public class OverViewService {
 
 		    return facilityDTOList;
 	}
+	
+	public Integer vlRealTimeTesting() {
+		return dashBoardOverViewRepo.vlRealTimeTesting();
+	}
+	
+	public Integer dsrcCountCurrentFinancialYear() {
+		return dashBoardOverViewRepo.dsrcCountCurrentFinancialYear();
+	}
+	
+	public Integer dsrcCountStateCurrentFinancialYear(Integer stateId) {
+		return dashBoardOverViewRepo.dsrcCountStateCurrentFinancialYear(stateId);
+	}
+	
+	public List<FacilityDTO> stateWiseActiveUserAndLoginCount(){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.stateWiseActiveUserAndLoginCount();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setActiveUsers((Integer) row[1]);
+		        facilityDTO.setCount((Integer) row[2]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		    }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+
+		    return facilityDTOList;
+	}
+	
 	
 }

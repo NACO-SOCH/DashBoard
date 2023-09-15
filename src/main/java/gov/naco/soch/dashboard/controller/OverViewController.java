@@ -77,104 +77,105 @@ public class OverViewController {
 		return new ResponseEntity<Integer>(resultCount, HttpStatus.OK);
 	}
 	
-    @GetMapping("/artDispensationLast1Month")
-    public ResponseEntity<Integer> artDispensationLast1Month() {
+	//-------------//
+    @GetMapping("/artDispensationCurrentFinancialYear")
+    public ResponseEntity<Integer> artDispensationCurrentFinancialYear() {
         try {
-            Integer resultCount = overViewService.artDispensationLast1Month();
+            Integer resultCount = overViewService.artDispensationCurrentFinancialYear();
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/artDispensationStateLast1Month/{stateId}")
-    public ResponseEntity<Integer> artDispensationStateLast1Month(@PathVariable Integer stateId) {
+    @GetMapping("/artDispensationStateCurrentFinancialYear/{stateId}")
+    public ResponseEntity<Integer> artDispensationStateCurrentFinancialYear(@PathVariable Integer stateId) {
         try {
-            Integer resultCount = overViewService.artDispensationStateLast1Month(stateId);
+            Integer resultCount = overViewService.artDispensationStateCurrentFinancialYear(stateId);
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/ictcTest1Month")
-    public ResponseEntity<Integer> ictcTest1Month() {
+    @GetMapping("/ictcTestCurrentFinancialYear")
+    public ResponseEntity<Integer> ictcTestCurrentFinancialYear() {
         try {
-            Integer resultCount = overViewService.ictcTest1Month();
+            Integer resultCount = overViewService.ictcTestCurrentFinancialYear();
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/ictcTestState1Month/{stateId}")
-    public ResponseEntity<Integer> ictcTestState1Month(@PathVariable Integer stateId) {
+    @GetMapping("/ictcTestStateCurrentFinancialYear/{stateId}")
+    public ResponseEntity<Integer> ictcTestStateCurrentFinancialYear(@PathVariable Integer stateId) {
         try {
-            Integer resultCount = overViewService.ictcTestState1Month(stateId);
+            Integer resultCount = overViewService.ictcTestStateCurrentFinancialYear(stateId);
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/vlTest1Month")
-    public ResponseEntity<Integer> vlTest1Month() {
+    @GetMapping("/vlTestCurrentFinancialYear")
+    public ResponseEntity<Integer> vlTestCurrentFinancialYear() {
         try {
-            Integer resultCount = overViewService.vlTest1Month();
+            Integer resultCount = overViewService.vlTestCurrentFinancialYear();
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/vlTestState1Month/{stateId}")
-    public ResponseEntity<Integer> vlTestState1Month(@PathVariable Integer stateId) {
+    @GetMapping("/vlTestStateCurrentFinancialYear/{stateId}")
+    public ResponseEntity<Integer> vlTestStateCurrentFinancialYear(@PathVariable Integer stateId) {
         try {
-            Integer resultCount = overViewService.vlTestState1Month(stateId);
+            Integer resultCount = overViewService.vlTestStateCurrentFinancialYear(stateId);
             return new ResponseEntity<>(resultCount, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-    @GetMapping("/tiCorelast30Days")
-    public ResponseEntity<Integer> getTiCoreLast30Days() {
+    @GetMapping("/tiCoreCurrentFinancialYear")
+    public ResponseEntity<Integer> getTiCoreCurrentFinancialYear() {
     	Integer result;
     	try {
-            result = overViewService.getTiCoreLast30Days();
+            result = overViewService.getTiCoreCurrentFinancialYear();
             return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/tiBridgePopulation30Days")
-    public ResponseEntity<Integer> getTiBridgePopulation30Days() {
+    @GetMapping("/tiBridgePopulationCurrentFinancialYear")
+    public ResponseEntity<Integer> getTiBridgePopulationCurrentFinancialYear() {
     	Integer result;
         try {
-            result = overViewService.getTiBridgePopulation30Days();
+            result = overViewService.getTiBridgePopulationCurrentFinancialYear();
             return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/tiCorStateeLast30Days/{stateId}")
-    public ResponseEntity<Integer> tiCorStateeLast30Days(@PathVariable Integer stateId) {
+    @GetMapping("/tiCorStateCurrentFinancialYear/{stateId}")
+    public ResponseEntity<Integer> tiCoreStateCurrentFinancialYear(@PathVariable Integer stateId) {
     	Integer result;
         try {
-            result = overViewService.tiCorStateeLast30Days(stateId);
+            result = overViewService.tiCoreStateCurrentFinancialYear(stateId);
             return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/tiBridgePopulationState30Days/{stateId}")
-    public ResponseEntity<Integer> tiBridgePopulationState30Days(@PathVariable Integer stateId) {
+    @GetMapping("/tiBridgePopulationStateCurrentFinancialYear/{stateId}")
+    public ResponseEntity<Integer> tiBridgePopulationStateCurrentFinancialYear(@PathVariable Integer stateId) {
     	Integer result;
         try {
-            result = overViewService.tiBridgePopulationState30Days(stateId);
+            result = overViewService.tiBridgePopulationStateCurrentFinancialYear(stateId);
             return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -182,15 +183,60 @@ public class OverViewController {
     }
     
     
-	@GetMapping("/loginDataStateWise30Days")
-	public ResponseEntity<List<FacilityDTO>> loginDataStateWise30Days(){
+	@GetMapping("/loginDataStateWise15Days")
+	public ResponseEntity<List<FacilityDTO>> loginDataStateWise15Days(){
 		List<FacilityDTO> result;
 		try {
-			result = overViewService.loginDataStateWise30Days();
+			result = overViewService.loginDataStateWise15Days();
 		}catch(Exception e){
 			return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 	}
+	
+	 @GetMapping("/vlRealTimeTesting")
+	    public ResponseEntity<Integer> vlRealTimeTesting() {
+	    	Integer result;
+	        try {
+	            result = overViewService.vlRealTimeTesting();
+	            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+	        } catch (Exception e) {
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	 }
+	 
+	 @GetMapping("/dsrcCountCurrentFinancialYear")
+	    public ResponseEntity<Integer> dsrcCountCurrentFinancialYear() {
+	    	Integer result;
+	        try {
+	            result = overViewService.dsrcCountCurrentFinancialYear();
+	            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+	        } catch (Exception e) {
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	 }
+	 
+	 @GetMapping("/dsrcCountStateCurrentFinancialYear/{stateId}")
+	    public ResponseEntity<Integer> dsrcCountStateCurrentFinancialYear(@PathVariable Integer stateId) {
+	    	Integer result;
+	        try {
+	            result = overViewService.dsrcCountStateCurrentFinancialYear(stateId);
+	            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+	        } catch (Exception e) {
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	 }
+	 
+		@GetMapping("/stateWiseActiveUserAndLoginCount")
+		public ResponseEntity<List<FacilityDTO>> stateWiseActiveUserAndLoginCount(){
+			List<FacilityDTO> result;
+			try {
+				result = overViewService.stateWiseActiveUserAndLoginCount();
+			}catch(Exception e){
+				return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+		}
+	 
 
 }

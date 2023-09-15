@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class FacilityDTO {
 	
-	 @JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer facilityTypeId;
 	
 	private Integer count;
@@ -17,6 +17,9 @@ public class FacilityDTO {
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date dateTime;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer activeUsers;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date getDateTime() {
@@ -50,6 +53,15 @@ public class FacilityDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Integer getActiveUsers() {
+		return activeUsers;
+	}
+
+	public void setActiveUsers(Integer activeUsers) {
+		this.activeUsers = activeUsers;
+	}
+
 
 
 }
