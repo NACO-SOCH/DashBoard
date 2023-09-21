@@ -237,6 +237,52 @@ public class OverViewController {
 			}
 			return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 		}
+		
+		
+		 @GetMapping("/artDispensationStateWise/{stateId}")
+		    public ResponseEntity<Integer> artDispensationStateWise(@PathVariable Integer stateId) {
+		    	Integer result;
+		        try {
+		            result = overViewService.artDispensationStateWise(stateId);
+		            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		        } catch (Exception e) {
+		            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+		 }
+		 
+		 @GetMapping("/vlTestingStateWise/{stateId}")
+		    public ResponseEntity<Integer> vlTestingStateWise(@PathVariable Integer stateId) {
+		    	Integer result;
+		        try {
+		            result = overViewService.vlTestingStateWise(stateId);
+		            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		        } catch (Exception e) {
+		            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+		 }
+		 
+		 @GetMapping("/hivTestRealTime/{stateId}")
+		    public ResponseEntity<Integer> hivTestRealTime(@PathVariable Integer stateId) {
+		    	Integer result;
+		        try {
+		            result = overViewService.hivTestRealTime(stateId);
+		            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		        } catch (Exception e) {
+		            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+		 }
+		 
+		 @GetMapping("/realTimeUserViaState/{stateId}")
+		    public ResponseEntity<Integer> realTimeUserViaState(@PathVariable Integer stateId) {
+		    	Integer result;
+		        try {
+		            result = overViewService.realTimeUserViaState(stateId);
+		            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		        } catch (Exception e) {
+		            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		        }
+		 }
+		 
 	 
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.repository.DashBoardFacilityRepo;
+import gov.naco.soch.singelton.LoggerSingleton;
 
 @Service
 @Transactional
@@ -19,15 +20,13 @@ public class FacilityService {
 	
 	@Autowired
 	DashBoardFacilityRepo dashBoardFacilityRepo;
-	
-	private static final Logger logger = Logger.getLogger(FacilityService.class.getName());
 
+	Logger logger = LoggerSingleton.getInstance().getLogger();
 	
 	public List<FacilityDTO> facilityIdCount(){
 		
 		  List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.facilityIdCount();
 		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
-//		  logger.info(dashBoardOverviewList.size()+""); 
 		  
 		  try {
 			  for (Object[] row : dashBoardOverviewList) {
@@ -96,7 +95,6 @@ public class FacilityService {
 		    return facilityDTOList;
 	}
 	
-	//----------------------------//
 	public Integer getTotalTICoreCount() {
         return dashBoardFacilityRepo.getTotalTICoreCount();
     }

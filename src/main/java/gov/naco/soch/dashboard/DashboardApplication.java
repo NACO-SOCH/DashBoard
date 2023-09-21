@@ -16,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EntityScan("gov.naco.soch.entity")
 @ComponentScan(basePackages = { "gov.naco.soch" })
 @EnableAutoConfiguration
-//@PropertySource("classpath:application-${spring.profiles.active}.yml")
 @EnableScheduling
 @Configuration
 public class DashboardApplication {

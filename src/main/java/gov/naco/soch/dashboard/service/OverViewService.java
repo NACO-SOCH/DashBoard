@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.logging.Logger;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.repository.DashBoardOverViewRepo;
+import gov.naco.soch.singelton.LoggerSingleton;
 
 @Service
 @Transactional
@@ -20,8 +18,7 @@ public class OverViewService {
 	@Autowired
 	DashBoardOverViewRepo dashBoardOverViewRepo;
 	
-
-	private static final Logger logger = Logger.getLogger(OverViewService.class.getName());
+    Logger logger = LoggerSingleton.getInstance().getLogger();
 	
 	
 	public Integer loginRealTimeCount() {  
@@ -135,5 +132,44 @@ public class OverViewService {
 		    return facilityDTOList;
 	}
 	
+	public Integer artDispensationStateWise(Integer stateId) {
+//		Integer result = null;
+//		try {
+//			result = dashBoardOverViewRepo.artDispensationStateWise(stateId);
+//		}catch(Exception e){
+//			logger.info(e.getMessage());
+//		}
+		return dashBoardOverViewRepo.artDispensationStateWise(stateId);
+	}
+	
+	public Integer vlTestingStateWise(Integer stateId) {
+//		Integer result = null;
+//		try {
+//			result = dashBoardOverViewRepo.vlTestingStateWise(stateId);
+//		}catch(Exception e){
+//			logger.info(e.getMessage());
+//		}
+		return dashBoardOverViewRepo.artDispensationStateWise(stateId);
+	}
+	
+	public Integer hivTestRealTime(Integer stateId) {
+//		Integer result = null;
+//		try {
+//			result = dashBoardOverViewRepo.hivTestRealTime(stateId);
+//		}catch(Exception e){
+//			logger.info(e.getMessage());
+//		}
+		return dashBoardOverViewRepo.hivTestRealTime(stateId);
+	}
+	
+	public Integer realTimeUserViaState(Integer stateId) {
+//		Integer result = null;
+//		try {
+//			result = dashBoardOverViewRepo.realTimeUserViaState(stateId);
+//		}catch(Exception e){
+//			logger.info(e.getMessage());
+//		}
+		return dashBoardOverViewRepo.realTimeUserViaState(stateId);
+	}
 	
 }

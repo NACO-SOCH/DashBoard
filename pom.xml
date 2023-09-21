@@ -52,11 +52,6 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 	</dependencies>
-	
-	
-
-	
-	
 
 	<build>
 		<finalName>dashboard</finalName>
