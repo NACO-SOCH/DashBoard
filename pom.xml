@@ -14,9 +14,9 @@
 	<maven.dependency.version>3.0.2</maven.dependency.version>
 	</properties>
 	  <groupId>soch.naco.gov</groupId>
-	  <artifactId>nphoapis</artifactId>
+	  <artifactId>dashboard</artifactId>
 	  <packaging>war</packaging>
-	  <name>soch-npho-dashboard</name>
+	  <name>soch-dashboard</name>
 	<dependencies>
 	 <dependency>
 				<groupId>gov.naco.soch</groupId>
