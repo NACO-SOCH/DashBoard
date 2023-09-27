@@ -1,5 +1,6 @@
 package gov.naco.soch.dashboard.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,43 +134,41 @@ public class OverViewService {
 	}
 	
 	public Integer artDispensationStateWise(Integer stateId) {
-//		Integer result = null;
-//		try {
-//			result = dashBoardOverViewRepo.artDispensationStateWise(stateId);
-//		}catch(Exception e){
-//			logger.info(e.getMessage());
-//		}
 		return dashBoardOverViewRepo.artDispensationStateWise(stateId);
 	}
 	
 	public Integer vlTestingStateWise(Integer stateId) {
-//		Integer result = null;
-//		try {
-//			result = dashBoardOverViewRepo.vlTestingStateWise(stateId);
-//		}catch(Exception e){
-//			logger.info(e.getMessage());
-//		}
 		return dashBoardOverViewRepo.artDispensationStateWise(stateId);
 	}
 	
 	public Integer hivTestRealTime(Integer stateId) {
-//		Integer result = null;
-//		try {
-//			result = dashBoardOverViewRepo.hivTestRealTime(stateId);
-//		}catch(Exception e){
-//			logger.info(e.getMessage());
-//		}
 		return dashBoardOverViewRepo.hivTestRealTime(stateId);
 	}
 	
 	public Integer realTimeUserViaState(Integer stateId) {
-//		Integer result = null;
-//		try {
-//			result = dashBoardOverViewRepo.realTimeUserViaState(stateId);
-//		}catch(Exception e){
-//			logger.info(e.getMessage());
-//		}
 		return dashBoardOverViewRepo.realTimeUserViaState(stateId);
+	}
+	
+//	public List<FacilityDTO> loginUsage(Integer stateId) {
+//		return dashBoardOverViewRepo.loginUsage(stateId);
+//	}
+	
+	public List<FacilityDTO> loginUsage(Integer stateId){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginUsage(stateId);
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setDateTime((Date) row[0]);
+		        facilityDTO.setName((String) row[1]);
+		        facilityDTO.setCount((Integer) row[2]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
 	}
 	
 }

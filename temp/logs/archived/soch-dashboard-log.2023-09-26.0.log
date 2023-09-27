@@ -1,0 +1,96 @@
+2023-09-26 09:42:36,000 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] Starting DashboardApplication on DESKTOP-KI0ECHQ with PID 67600 (started by Neco it in C:\Users\Neco it\sochbackend\DashBoard)
+2023-09-26 09:42:36,008 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] The following profiles are active: @env@
+2023-09-26 09:42:36,069 INFO org.springframework.boot.devtools.restart.ChangeableUrls [restartedMain] The Class-Path manifest attribute in C:\Users\Neco it\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.2\jaxb-runtime-2.3.2.jar referenced one or more files that do not exist: file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.xml.bind-api-2.3.2.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/txw2-2.3.2.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/istack-commons-runtime-3.0.8.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/stax-ex-1.8.1.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/FastInfoset-1.2.16.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.activation-api-1.2.1.jar
+2023-09-26 09:42:36,074 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-26 09:42:36,074 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-26 09:42:37,556 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-26 09:42:38,960 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 1397ms. Found 454 JPA repository interfaces.
+2023-09-26 09:42:39,683 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:39,714 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:39,719 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:39,720 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@37c6fe33' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:39,724 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:39,727 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-26 09:42:40,105 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 9070 (http)
+2023-09-26 09:42:40,113 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-09-26 09:42:40,113 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.29]
+2023-09-26 09:42:40,221 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/dashboard] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-09-26 09:42:40,221 INFO org.springframework.web.context.ContextLoader [restartedMain] Root WebApplicationContext: initialization completed in 4147 ms
+2023-09-26 09:42:40,658 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-26 09:42:40,730 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.4.9.Final}
+2023-09-26 09:42:40,832 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2023-09-26 09:42:41,079 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-09-26 09:42:42,611 WARN org.hibernate.boot.internal.InFlightMetadataCollectorImpl [restartedMain] HHH000069: Duplicate generator name tiOstBeneficiary
+2023-09-26 09:42:42,883 WARN org.hibernate.orm.cache [restartedMain] HHH90001006: Missing cache[default-update-timestamps-region] was created on-the-fly. The created cache will use a provider-specific default configuration: make sure you defined one. You can disable this warning by setting 'hibernate.javax.cache.missing_cache_strategy' to 'create'.
+2023-09-26 09:42:42,954 INFO org.ehcache.core.EhcacheManager [restartedMain] Cache 'default-update-timestamps-region' created in EhcacheManager.
+2023-09-26 09:42:42,961 WARN org.hibernate.orm.cache [restartedMain] HHH90001006: Missing cache[default-query-results-region] was created on-the-fly. The created cache will use a provider-specific default configuration: make sure you defined one. You can disable this warning by setting 'hibernate.javax.cache.missing_cache_strategy' to 'create'.
+2023-09-26 09:42:42,963 INFO org.ehcache.core.EhcacheManager [restartedMain] Cache 'default-query-results-region' created in EhcacheManager.
+2023-09-26 09:42:45,872 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-26 09:42:46,071 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-26 09:42:48,057 INFO gov.naco.soch.security.WebSecurityConfig [restartedMain] Server is starting with crossDomainAllowedOrigins->:
+2023-09-26 09:42:48,110 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@b5a68cb, org.springframework.security.web.context.SecurityContextPersistenceFilter@3314d102, org.springframework.security.web.header.HeaderWriterFilter@21a607ce, org.springframework.web.filter.CorsFilter@4f758560, org.springframework.security.web.authentication.logout.LogoutFilter@53b683c, gov.naco.soch.security.JwtAuthenticationFilter@2046cb33, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4f5888cd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c7c7c66, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65d312bb, org.springframework.security.web.session.SessionManagementFilter@423a7be5, org.springframework.security.web.access.ExceptionTranslationFilter@45c4f188, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1b14b3ed]
+2023-09-26 09:42:53,204 INFO org.springframework.data.projection.DefaultProjectionInformation$PropertyDescriptorSource [restartedMain] Couldn't read class metadata for interface java.util.Map. Input property calculation might fail!
+2023-09-26 09:42:55,019 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2023-09-26 09:42:55,160 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [restartedMain] Initializing ExecutorService 'taskScheduler'
+2023-09-26 09:42:55,461 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-09-26 09:42:55,555 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 9070 (http) with context path '/dashboard'
+2023-09-26 09:42:55,565 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] Started DashboardApplication in 20.03 seconds (JVM running for 20.749)
+2023-09-26 09:43:09,249 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/dashboard] [http-nio-9070-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-26 09:43:09,249 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-9070-exec-1] Initializing Servlet 'dispatcherServlet'
+2023-09-26 09:43:09,254 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-9070-exec-1] Completed initialization in 5 ms
+2023-09-26 09:43:09,266 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 09:43:09,269 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Authentication Failed. No token!!
+2023-09-26 09:43:16,971 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 09:43:17,011 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Processing request --> username-->null:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 09:43:21,629 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->null:-->4658 ms
+2023-09-26 09:57:39,392 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-5] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 09:57:39,393 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-5] Authentication Failed. No token!!
+2023-09-26 09:59:07,511 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-7] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 09:59:07,511 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-7] Authentication Failed. No token!!
+2023-09-26 10:00:49,461 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:00:49,462 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Authentication Failed. No token!!
+2023-09-26 10:01:56,610 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:01:56,613 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Processing request --> username-->artdatatonk:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:01:56,722 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->artdatatonk:-->112 ms
+2023-09-26 10:04:31,146 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:04:31,147 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Authentication Failed. No token!!
+2023-09-26 10:04:52,155 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Got the request-->/dashboard/Reports/dispensationReport:
+2023-09-26 10:04:52,157 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Processing request --> username-->artdatatonk:request-->/dashboard/Reports/dispensationReport:
+2023-09-26 10:04:53,496 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] APIEXECUTIONTIME /dashboard/Reports/dispensationReport-->username-->artdatatonk:-->1341 ms
+2023-09-26 10:08:09,769 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:08:09,773 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Processing request --> username-->RJME:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:08:09,852 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->RJME:-->83 ms
+2023-09-26 10:09:40,446 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:09:40,446 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Authentication Failed. No token!!
+2023-09-26 10:11:22,261 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:11:22,261 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Authentication Failed. No token!!
+2023-09-26 10:12:17,206 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-5] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:12:17,206 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-5] Processing request --> username-->artdatatonk:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:12:17,253 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-5] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->artdatatonk:-->47 ms
+2023-09-26 10:36:06,470 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-8] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:06,471 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-8] Authentication Failed. No token!!
+2023-09-26 10:36:07,954 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:07,954 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Authentication Failed. No token!!
+2023-09-26 10:36:08,418 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-10] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:08,418 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-10] Authentication Failed. No token!!
+2023-09-26 10:36:08,593 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:08,593 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Authentication Failed. No token!!
+2023-09-26 10:36:08,778 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:08,778 ERROR gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-1] Authentication Failed. No token!!
+2023-09-26 10:36:49,756 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:49,757 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Processing request --> username-->artdatatonk:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:49,820 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->artdatatonk:-->64 ms
+2023-09-26 10:36:57,844 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:57,846 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Processing request --> username-->artdatatonk:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:36:58,305 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->artdatatonk:-->461 ms
+2023-09-26 10:39:34,928 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:39:34,930 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] Processing request --> username-->RJME:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:39:34,981 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-9] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->RJME:-->53 ms
+2023-09-26 10:40:25,438 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Got the request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:40:25,440 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Processing request --> username-->RJME:request-->/dashboard/MprReports/ArtMPR:
+2023-09-26 10:40:25,491 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] APIEXECUTIONTIME /dashboard/MprReports/ArtMPR-->username-->RJME:-->53 ms
+2023-09-26 10:59:41,504 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [Thread-6] Shutting down ExecutorService 'taskScheduler'
+2023-09-26 10:59:41,507 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-6] Shutting down ExecutorService 'applicationTaskExecutor'
+2023-09-26 10:59:41,644 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [Thread-6] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-26 10:59:41,657 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-query-results-region' removed from EhcacheManager.
+2023-09-26 10:59:41,663 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-update-timestamps-region' removed from EhcacheManager.

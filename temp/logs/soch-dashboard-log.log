@@ -1,5 +1,126 @@
-2023-09-25 09:29:11,473 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [Thread-6] Shutting down ExecutorService 'taskScheduler'
-2023-09-25 09:29:11,521 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-6] Shutting down ExecutorService 'applicationTaskExecutor'
-2023-09-25 09:29:11,636 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [Thread-6] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-25 09:29:11,640 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-query-results-region' removed from EhcacheManager.
-2023-09-25 09:29:11,648 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-update-timestamps-region' removed from EhcacheManager.
+2023-09-27 10:31:34,231 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] Starting DashboardApplication on DESKTOP-KI0ECHQ with PID 49100 (started by Neco it in C:\Users\Neco it\sochbackend\DashBoard)
+2023-09-27 10:31:34,237 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] The following profiles are active: @env@
+2023-09-27 10:31:34,288 INFO org.springframework.boot.devtools.restart.ChangeableUrls [restartedMain] The Class-Path manifest attribute in C:\Users\Neco it\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.2\jaxb-runtime-2.3.2.jar referenced one or more files that do not exist: file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.xml.bind-api-2.3.2.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/txw2-2.3.2.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/istack-commons-runtime-3.0.8.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/stax-ex-1.8.1.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/FastInfoset-1.2.16.jar,file:/C:/Users/Neco%20it/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2/jakarta.activation-api-1.2.1.jar
+2023-09-27 10:31:34,293 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-27 10:31:34,293 INFO org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-27 10:31:35,650 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-27 10:31:37,032 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 1376ms. Found 454 JPA repository interfaces.
+2023-09-27 10:31:37,780 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:37,810 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:37,813 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:37,815 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@34db7b12' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:37,818 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:37,821 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-09-27 10:31:38,195 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 9070 (http)
+2023-09-27 10:31:38,202 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-09-27 10:31:38,202 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.29]
+2023-09-27 10:31:38,326 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/dashboard] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-09-27 10:31:38,326 INFO org.springframework.web.context.ContextLoader [restartedMain] Root WebApplicationContext: initialization completed in 4033 ms
+2023-09-27 10:31:38,780 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-27 10:31:38,843 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate Core {5.4.9.Final}
+2023-09-27 10:31:38,957 INFO org.hibernate.annotations.common.Version [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2023-09-27 10:31:39,184 INFO org.hibernate.dialect.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-09-27 10:31:40,441 WARN org.hibernate.boot.internal.InFlightMetadataCollectorImpl [restartedMain] HHH000069: Duplicate generator name tiOstBeneficiary
+2023-09-27 10:31:40,692 WARN org.hibernate.orm.cache [restartedMain] HHH90001006: Missing cache[default-update-timestamps-region] was created on-the-fly. The created cache will use a provider-specific default configuration: make sure you defined one. You can disable this warning by setting 'hibernate.javax.cache.missing_cache_strategy' to 'create'.
+2023-09-27 10:31:40,764 INFO org.ehcache.core.EhcacheManager [restartedMain] Cache 'default-update-timestamps-region' created in EhcacheManager.
+2023-09-27 10:31:40,771 WARN org.hibernate.orm.cache [restartedMain] HHH90001006: Missing cache[default-query-results-region] was created on-the-fly. The created cache will use a provider-specific default configuration: make sure you defined one. You can disable this warning by setting 'hibernate.javax.cache.missing_cache_strategy' to 'create'.
+2023-09-27 10:31:40,773 INFO org.ehcache.core.EhcacheManager [restartedMain] Cache 'default-query-results-region' created in EhcacheManager.
+2023-09-27 10:31:43,841 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-27 10:31:44,058 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-27 10:31:46,207 INFO gov.naco.soch.security.WebSecurityConfig [restartedMain] Server is starting with crossDomainAllowedOrigins->:
+2023-09-27 10:31:46,242 INFO org.springframework.security.web.DefaultSecurityFilterChain [restartedMain] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59a9f743, org.springframework.security.web.context.SecurityContextPersistenceFilter@28a3373, org.springframework.security.web.header.HeaderWriterFilter@8c56913, org.springframework.web.filter.CorsFilter@70e8818b, org.springframework.security.web.authentication.logout.LogoutFilter@5d9ea14d, gov.naco.soch.security.JwtAuthenticationFilter@4bb378d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@10b1b3b0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38acc194, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@452f2e2, org.springframework.security.web.session.SessionManagementFilter@77e8d304, org.springframework.security.web.access.ExceptionTranslationFilter@2f9629d7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@18fb9301]
+2023-09-27 10:31:48,595 INFO org.springframework.data.projection.DefaultProjectionInformation$PropertyDescriptorSource [restartedMain] Couldn't read class metadata for interface java.util.Map. Input property calculation might fail!
+2023-09-27 10:31:52,872 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2023-09-27 10:31:53,019 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [restartedMain] Initializing ExecutorService 'taskScheduler'
+2023-09-27 10:31:53,317 INFO org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-09-27 10:31:53,412 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [restartedMain] Tomcat started on port(s): 9070 (http) with context path '/dashboard'
+2023-09-27 10:31:53,419 INFO gov.naco.soch.dashboard.DashboardApplication [restartedMain] Started DashboardApplication in 19.647 seconds (JVM running for 20.234)
+2023-09-27 10:33:23,382 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/dashboard] [http-nio-9070-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-27 10:33:23,382 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-9070-exec-2] Initializing Servlet 'dispatcherServlet'
+2023-09-27 10:33:23,389 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-9070-exec-2] Completed initialization in 7 ms
+2023-09-27 10:33:23,402 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] Got the request-->/dashboard/overview/loginUsage/1:
+2023-09-27 10:33:23,457 WARN gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-2] The token is expired and not valid anymore
+io.jsonwebtoken.ExpiredJwtException: JWT expired at 2023-09-27T10:09:15Z. Current time: 2023-09-27T10:33:23Z, a difference of 1448456 milliseconds.  Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:385)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at gov.naco.soch.security.JwtTokenUtil.getAllClaimsFromToken(JwtTokenUtil.java:54)
+	at gov.naco.soch.security.JwtTokenUtil.getClaimFromToken(JwtTokenUtil.java:44)
+	at gov.naco.soch.security.JwtTokenUtil.getUsernameFromToken(JwtTokenUtil.java:35)
+	at gov.naco.soch.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:97)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:860)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1591)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-09-27 10:33:29,987 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Got the request-->/dashboard/overview/loginUsage/1:
+2023-09-27 10:33:29,990 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] Processing request --> username-->null:request-->/dashboard/overview/loginUsage/1:
+2023-09-27 10:33:30,063 WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper [http-nio-9070-exec-3] SQL Error: 0, SQLState: 42601
+2023-09-27 10:33:30,063 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [http-nio-9070-exec-3] ERROR: syntax error at or near "soch"
+  Position: 70
+2023-09-27 10:33:30,081 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-3] APIEXECUTIONTIME /dashboard/overview/loginUsage/1-->username-->null:-->94 ms
+2023-09-27 10:34:00,854 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Got the request-->/dashboard/overview/loginUsage:
+2023-09-27 10:34:00,855 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] Processing request --> username-->null:request-->/dashboard/overview/loginUsage:
+2023-09-27 10:34:00,861 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-4] APIEXECUTIONTIME /dashboard/overview/loginUsage-->username-->null:-->7 ms
+2023-09-27 10:34:35,912 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Got the request-->/dashboard/overview/%7B1%7D:
+2023-09-27 10:34:35,913 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] Processing request --> username-->null:request-->/dashboard/overview/%7B1%7D:
+2023-09-27 10:34:35,915 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-6] APIEXECUTIONTIME /dashboard/overview/%7B1%7D-->username-->null:-->3 ms
+2023-09-27 10:34:41,556 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-7] Got the request-->/dashboard/overview/1:
+2023-09-27 10:34:41,557 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-7] Processing request --> username-->null:request-->/dashboard/overview/1:
+2023-09-27 10:34:41,560 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-7] APIEXECUTIONTIME /dashboard/overview/1-->username-->null:-->4 ms
+2023-09-27 10:36:07,268 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-10] Got the request-->/dashboard/overview/loginUsage/1:
+2023-09-27 10:36:07,281 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-10] Processing request --> username-->null:request-->/dashboard/overview/loginUsage/1:
+2023-09-27 10:36:07,284 WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper [http-nio-9070-exec-10] SQL Error: 0, SQLState: 42601
+2023-09-27 10:36:07,284 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper [http-nio-9070-exec-10] ERROR: syntax error at or near "soch"
+  Position: 70
+2023-09-27 10:36:07,285 INFO gov.naco.soch.security.JwtAuthenticationFilter [http-nio-9070-exec-10] APIEXECUTIONTIME /dashboard/overview/loginUsage/1-->username-->null:-->17 ms
+2023-09-27 10:40:04,467 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [Thread-6] Shutting down ExecutorService 'taskScheduler'
+2023-09-27 10:40:04,469 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-6] Shutting down ExecutorService 'applicationTaskExecutor'
+2023-09-27 10:40:04,644 INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [Thread-6] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-27 10:40:04,646 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-query-results-region' removed from EhcacheManager.
+2023-09-27 10:40:04,648 INFO org.ehcache.core.EhcacheManager [Thread-6] Cache 'default-update-timestamps-region' removed from EhcacheManager.

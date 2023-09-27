@@ -283,6 +283,28 @@ public class OverViewController {
 		        }
 		 }
 		 
+//		 @GetMapping("/loginUsage/{stateId}")
+//		    public ResponseEntity<List<FacilityDTO>> loginUsage(@PathVariable Integer stateId) {
+//		    	Integer result;
+//		        try {
+//		            result = overViewService.loginUsage(stateId);
+//		            return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+//		        } catch (Exception e) {
+//		            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		        }
+//		 }
+		 
+			@GetMapping("/loginUsage/{stateId}")
+			public ResponseEntity<List<FacilityDTO>> loginUsage(@PathVariable Integer stateId){
+				List<FacilityDTO> result;
+				try {
+					 result = overViewService.loginUsage(stateId);;
+				}catch(Exception e){
+					return new  ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+				return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+			}
+		 
 	 
 
 }
