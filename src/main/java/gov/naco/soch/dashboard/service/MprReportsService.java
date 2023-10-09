@@ -46,6 +46,21 @@ public class MprReportsService {
 			return mprReportsRepository.getVLMPRDatastate(mpr_month, mpr_year, state_id).stream();
 		}
 	}
+	
+	
+	
+	public Stream<Object[]> getConsolidatedVLMPRData(Integer Lab_id, Integer mpr_month, Integer mpr_year, Integer state_id) {
+
+		if (Lab_id == null && state_id == null) {
+			logger.info("method 1");
+			return mprReportsRepository.getConsolidatedVLMPRData(mpr_month, mpr_year).stream();
+		} else if (Lab_id != null) {
+			logger.info("method 2");
+			return mprReportsRepository.getConsolidatedVLMPRDataName(mpr_month, mpr_year, Lab_id).stream();
+		} else {
+			return mprReportsRepository.getConsolidatedVLMPRDatastate(mpr_month, mpr_year, state_id).stream();
+		}
+	}
 
 	public Stream<Object[]> getCD4MPRData(Integer Lab_id, Integer mpr_month, Integer mpr_year, Integer state_id) {
 

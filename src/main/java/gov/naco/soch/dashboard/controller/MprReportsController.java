@@ -153,6 +153,68 @@ public class MprReportsController {
 		return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
 	}
 
+	
+	@GetMapping("/ConsolidatedVLmpr")
+	public ResponseEntity<byte[]> getConsolidatedVlMpr(@RequestParam Integer LabId, @RequestParam Integer mprMonth,
+			@RequestParam Integer mprYear, @RequestParam Integer StateId,
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "1000") Integer pageSize)
+			throws IOException {
+
+		List<Object[]> allData = mprReportsService.getConsolidatedVLMPRData(LabId, mprMonth, mprYear, StateId)
+				.collect(Collectors.toList());
+
+		int totalRecords = allData.size();
+		int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+		Stream<Object[]> chunkDataStream = allData.stream().skip(page * pageSize).limit(totalRecords);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("X-Total-Records", String.valueOf(totalRecords));
+		headers.add("X-Total-Pages", String.valueOf(totalPages));
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", "Consolidated_VL_MPR.xlsx");
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+		try (InputStream templateStream = getClass().getResourceAsStream("/VL_MPR.xlsx");
+				Workbook workbook = WorkbookFactory.create(templateStream)) {
+
+			Sheet sheet = workbook.getSheet("VL");
+
+			int rowIdx = sheet.getLastRowNum() + 1;
+			CellStyle numericCellStyle = workbook.createCellStyle();
+			DataFormat dataFormat = workbook.createDataFormat();
+			numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+			for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+				Row row = sheet.createRow(rowIdx++);
+				int cellIdx = 0;
+				for (Object cellData : rowData) {
+					Cell cell = row.createCell(cellIdx++);
+					if (cellData != null) {
+						if (cellData instanceof Number) {
+							// Set numeric cell value and apply numeric cell style
+							cell.setCellValue(((Number) cellData).doubleValue());
+							cell.setCellStyle(numericCellStyle);
+						} else {
+							// Set string cell value
+							cell.setCellValue(cellData.toString());
+						}
+					} else {
+						// Handle the case where cellData is null
+						cell.setCellValue(""); // or set a default value
+					}
+				}
+			}
+			workbook.setForceFormulaRecalculation(true); // Enable automatic formula recalculation
+
+			workbook.write(outputStream);
+		}
+
+		return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
+	}
+	
+	
 	@GetMapping("/CD4mpr")
 	public ResponseEntity<byte[]> getCD4Mpr(@RequestParam Integer LabId, @RequestParam Integer mprMonth,
 			@RequestParam Integer mprYear, @RequestParam Integer StateId,
