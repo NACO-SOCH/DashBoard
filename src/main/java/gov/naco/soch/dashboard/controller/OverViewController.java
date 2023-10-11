@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
+import gov.naco.soch.dashboard.DTO.FaqDTO;
 import gov.naco.soch.dashboard.DTO.GeoMappingDTO;
 import gov.naco.soch.dashboard.service.OverViewService;
 
@@ -313,6 +314,17 @@ public class OverViewController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<List<GeoMappingDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getFAQ")
+	public ResponseEntity<List<FaqDTO>> getFAQ() {
+		List<FaqDTO> result;
+		try {
+			result = overViewService.getFAQ();
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FaqDTO>>(result, HttpStatus.OK);
 	}
 
 }

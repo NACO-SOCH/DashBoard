@@ -117,7 +117,7 @@ public class MprReportsService {
 		}
 	}
 	
-	 public int mprCount (Integer reportType, Integer userid,Integer stateid) {
+	 public int mprCount (Integer reportType, Long userid,Integer stateid) {
 		 return mprReportsRepository.mprCount(reportType, userid, stateid);
 	 }
 	 

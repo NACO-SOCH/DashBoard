@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
+import gov.naco.soch.dashboard.DTO.FaqDTO;
 import gov.naco.soch.dashboard.DTO.GeoMappingDTO;
 import gov.naco.soch.repository.DashBoardOverViewRepo;
 import gov.naco.soch.singelton.LoggerSingleton;
@@ -210,4 +211,21 @@ public class OverViewService {
 		  return geoMappingDTOList;
 	}
 	
+	public List<FaqDTO> getFAQ(){
+
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.getFAQ();
+		  List<FaqDTO> faqDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		    	FaqDTO faqDTO = new FaqDTO();
+		    	faqDTO.setQuestion( row[0] != null ? (String) row[0] : null	);
+		    	faqDTO.setAnswer(row[1] != null ? (String) row[1] : null	);
+		    	faqDTOList.add(faqDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		  }
+		  
+		  return faqDTOList;
+	}
 }

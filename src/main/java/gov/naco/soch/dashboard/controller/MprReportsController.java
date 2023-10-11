@@ -451,7 +451,7 @@ public class MprReportsController {
 	}
 	
 	@PostMapping("/mprCount")
-	public ResponseEntity<Integer> MprCount(@RequestParam Integer reportType, @RequestParam Integer userid,@RequestParam(required = false) Integer stateid){
+	public ResponseEntity<Integer> MprCount(@RequestParam Integer reportType, @RequestParam Long userid,@RequestParam(required = false) Integer stateid){
 		Integer result;
 		try {
 			if (stateid == null) stateid = 0;
