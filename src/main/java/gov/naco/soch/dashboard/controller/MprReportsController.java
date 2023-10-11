@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,22 +17,30 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.naco.soch.dashboard.service.MprReportsService;
+import gov.naco.soch.singelton.LoggerSingleton;
 
 @RestController
 @RequestMapping("/MprReports")
 @CrossOrigin(origins = { "http://localhost:4200", "*" }, allowedHeaders = "*")
 public class MprReportsController {
+	
+	
 	@Autowired
 	MprReportsService mprReportsService;
+	
+    Logger logger = LoggerSingleton.getInstance().getLogger();
 
 	@GetMapping("/ictcmpr")
 	public ResponseEntity<byte[]> getIctcMpr(@RequestParam Integer facilityId, @RequestParam Integer mprMonth,
@@ -438,8 +447,65 @@ public class MprReportsController {
 
 			workbook.write(outputStream);
 		}
-
 		return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
 	}
+	
+	@PostMapping("/mprCount")
+	public ResponseEntity<Integer> MprCount(@RequestParam Integer reportType, @RequestParam Integer userid,@RequestParam(required = false) Integer stateid){
+		Integer result;
+		try {
+			if (stateid == null) stateid = 0;
+			result = mprReportsService.mprCount(reportType, userid,stateid);
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	@GetMapping("/mprCountNational")
+	public ResponseEntity<Integer> mprCountNational() {
+		Integer result;
+		try {
+			result = mprReportsService.mprCountNational();
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/mprCountStateWise/{stateId}")
+	public ResponseEntity<Integer> mprCountStateWise(@PathVariable Integer stateId) {
+		Integer result;
+		try {
+			result = mprReportsService.mprCountStateWise(stateId);
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/offlineCountNational")
+	public ResponseEntity<Integer> offlineCountNational() {
+		Integer result;
+		try {
+			result = mprReportsService.offlineCountNational();
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/offlineStateWise/{stateId}")
+	public ResponseEntity<Integer> offlineStateWise(@PathVariable Integer stateId) {
+		Integer result;
+		try {
+			result = mprReportsService.offlineStateWise(stateId);
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 
 }
