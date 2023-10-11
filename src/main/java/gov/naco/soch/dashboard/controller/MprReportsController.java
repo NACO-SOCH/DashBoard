@@ -154,7 +154,7 @@ public class MprReportsController {
 	}
 
 	
-	@GetMapping("/ConsolidatedVLmpr")
+	@GetMapping("/ConsolidatedVlMpr")
 	public ResponseEntity<byte[]> getConsolidatedVlMpr(@RequestParam Integer LabId, @RequestParam Integer mprMonth,
 			@RequestParam Integer mprYear, @RequestParam Integer StateId,
 			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "1000") Integer pageSize)
@@ -176,7 +176,7 @@ public class MprReportsController {
 
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		try (InputStream templateStream = getClass().getResourceAsStream("/VL_MPR.xlsx");
+		try (InputStream templateStream = getClass().getResourceAsStream("/Consolidated_VL_MPR.xlsx");
 				Workbook workbook = WorkbookFactory.create(templateStream)) {
 
 			Sheet sheet = workbook.getSheet("VL");
@@ -273,6 +273,68 @@ public class MprReportsController {
 
 		return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
 	}
+	
+	
+	
+	@GetMapping("/ConsolidatedCD4mpr")
+	public ResponseEntity<byte[]> getConsolidatedCD4mpr(@RequestParam Integer LabId, @RequestParam Integer mprMonth,
+			@RequestParam Integer mprYear, @RequestParam Integer StateId,
+			@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "1000") Integer pageSize)
+			throws IOException {
+
+		List<Object[]> allData = mprReportsService.getConsolidatedCD4mpr(LabId, mprMonth, mprYear, StateId)
+				.collect(Collectors.toList());
+
+		int totalRecords = allData.size();
+		int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+		Stream<Object[]> chunkDataStream = allData.stream().skip(page * pageSize).limit(totalRecords);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("X-Total-Records", String.valueOf(totalRecords));
+		headers.add("X-Total-Pages", String.valueOf(totalPages));
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", "Consolidated_CD4_MPR.xlsx");
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+		try (InputStream templateStream = getClass().getResourceAsStream("/Consolidated_CD4_MPR.xlsx");
+				Workbook workbook = WorkbookFactory.create(templateStream)) {
+
+			Sheet sheet = workbook.getSheet("CD4");
+
+			int rowIdx = sheet.getLastRowNum() + 1;
+			CellStyle numericCellStyle = workbook.createCellStyle();
+			DataFormat dataFormat = workbook.createDataFormat();
+			numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+			for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+				Row row = sheet.createRow(rowIdx++);
+				int cellIdx = 0;
+				for (Object cellData : rowData) {
+					Cell cell = row.createCell(cellIdx++);
+					if (cellData != null) {
+						if (cellData instanceof Number) {
+							// Set numeric cell value and apply numeric cell style
+							cell.setCellValue(((Number) cellData).doubleValue());
+							cell.setCellStyle(numericCellStyle);
+						} else {
+							// Set string cell value
+							cell.setCellValue(cellData.toString());
+						}
+					} else {
+						cell.setCellValue("");
+					}
+				}
+			}
+			workbook.setForceFormulaRecalculation(true);
+
+			workbook.write(outputStream);
+		}
+
+		return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
+	}
+	
 
 	@GetMapping("/Eidmpr")
 	public ResponseEntity<byte[]> getEidMpr(@RequestParam Integer LabId, @RequestParam Integer mprMonth,

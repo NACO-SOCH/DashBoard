@@ -75,6 +75,20 @@ public class MprReportsService {
 			return mprReportsRepository.getCD4MPRDatastate(mpr_month, mpr_year, state_id).stream();
 		}
 	}
+	
+	public Stream<Object[]> getConsolidatedCD4mpr(Integer Lab_id, Integer mpr_month, Integer mpr_year, Integer state_id) {
+
+		if (Lab_id == null && state_id == null) {
+			logger.info("method 1");
+			return mprReportsRepository.getConsolidatedCD4MPRData(mpr_month, mpr_year).stream();
+		} else if (Lab_id != null) {
+			logger.info("method 2");
+			return mprReportsRepository.getConsolidatedCD4MPRDataName(mpr_month, mpr_year, Lab_id).stream();
+		} else {
+			logger.info("method 3");
+			return mprReportsRepository.getConsolidatedCD4MPRDatastate(mpr_month, mpr_year, state_id).stream();
+		}
+	}
 
 	public Stream<Object[]> getEidMPRData(Integer Lab_id, Integer mpr_month, Integer mpr_year, Integer state_id) {
 
