@@ -1,6 +1,5 @@
 package gov.naco.soch.dashboard.service;
 
-import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -146,5 +145,25 @@ public class MprReportsService {
 			return mprReportsRepository.getOstMPRDatastate(mpr_month, mpr_year, ost_state_id).stream();
 		}
 	}
+	
+	 public int mprCount (Integer reportType, Integer userid,Integer stateid) {
+		 return mprReportsRepository.mprCount(reportType, userid, stateid);
+	 }
+	 
+	 public int mprCountNational() {
+		 return mprReportsRepository.mprCountNational();
+	 }
 
+	 public int mprCountStateWise (Integer stateid) {
+		 return mprReportsRepository.mprCountStateWise(stateid);
+	 }
+	 
+	 public int offlineCountNational() {
+		 return mprReportsRepository.offlineCountNational();
+	 }
+
+	 public int offlineStateWise (Integer stateid) {
+		 return mprReportsRepository.offlineStateWise(stateid);
+	 }
+	 
 }

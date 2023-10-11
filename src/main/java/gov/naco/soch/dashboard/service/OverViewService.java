@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
+import gov.naco.soch.dashboard.DTO.GeoMappingDTO;
 import gov.naco.soch.repository.DashBoardOverViewRepo;
 import gov.naco.soch.singelton.LoggerSingleton;
 
@@ -127,6 +128,7 @@ public class OverViewService {
 		        facilityDTOList.add(facilityDTO);
 		    }
 		    }catch(Exception e) {
+		    	
 		    	logger.info(e.getMessage());
 		    }
 
@@ -149,10 +151,6 @@ public class OverViewService {
 		return dashBoardOverViewRepo.realTimeUserViaState(stateId);
 	}
 	
-//	public List<FacilityDTO> loginUsage(Integer stateId) {
-//		return dashBoardOverViewRepo.loginUsage(stateId);
-//	}
-	
 	public List<FacilityDTO> loginUsage(Integer stateId){
 		
 		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginUsage(stateId);
@@ -160,15 +158,56 @@ public class OverViewService {
 		  try {
 		    for (Object[] row : dashBoardOverviewList) {
 		        FacilityDTO facilityDTO = new FacilityDTO();
-		        facilityDTO.setDateTime((Date) row[0]);
-		        facilityDTO.setName((String) row[1]);
-		        facilityDTO.setCount((Integer) row[2]); 
+		        facilityDTO.setFacilityTypeId((Integer) row[0]);
+		        facilityDTO.setCount((Integer) row[1]);
+		        facilityDTO.setDateTime((Date) row[2]); 
 		        facilityDTOList.add(facilityDTO);
 		    }
 		  }catch(Exception e) {
 		    	logger.info(e.getMessage());
 		    }
 		    return facilityDTOList;
+    }
+	
+	public List<GeoMappingDTO> geoMapping(){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.geoMapping();
+		  List<GeoMappingDTO> geoMappingDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		    	GeoMappingDTO geoMappingDTO = new GeoMappingDTO();
+		    	geoMappingDTO.setFacilityName( row[0] != null ? (String) row[0] : null	);
+		    	geoMappingDTO.setFacilityTypeName(row[1] != null ? (String) row[1] : null	);
+		    	geoMappingDTO.setGeoLatitude(row[2] != null ? (String) row[2] : null	);
+		    	geoMappingDTO.setGeoLongitude(row[3] != null ? (String) row[3] : null	);
+		    	geoMappingDTO.setStateName(row[4] != null ? (String) row[4] : null	);
+		    	geoMappingDTOList.add(geoMappingDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		  }
+		  
+		  return geoMappingDTOList;
+	}
+	public List<GeoMappingDTO> geoMappingState(Integer stateId){
+
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.geoMappingState(stateId);
+		  List<GeoMappingDTO> geoMappingDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		    	GeoMappingDTO geoMappingDTO = new GeoMappingDTO();
+		    	geoMappingDTO.setFacilityName( row[0] != null ? (String) row[0] : null	);
+		    	geoMappingDTO.setFacilityTypeName(row[1] != null ? (String) row[1] : null	);
+		    	geoMappingDTO.setGeoLatitude(row[2] != null ? (String) row[2] : null	);
+		    	geoMappingDTO.setGeoLongitude(row[3] != null ? (String) row[3] : null	);
+		    	geoMappingDTO.setStateName(row[4] != null ? (String) row[4] : null	);
+		    	geoMappingDTOList.add(geoMappingDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		  }
+		  
+		  return geoMappingDTOList;
 	}
 	
 }
