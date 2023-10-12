@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.dashboard.service.MprReportsService;
 import gov.naco.soch.singelton.LoggerSingleton;
 
@@ -631,5 +632,26 @@ public class MprReportsController {
 		}
 	}
 	
+	@GetMapping("/reportDownloadTypeWiseCount")  //change name
+	public ResponseEntity<List<FacilityDTO>> reportDownloadTypeWiseCount() {
+		List<FacilityDTO> result;
+		try {
+			result = mprReportsService.reportDownloadTypeWiseCount();
+			return new ResponseEntity< List<FacilityDTO>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/reportDownloadTypeWiseCountState")
+	public ResponseEntity<List<FacilityDTO>> reportDownloadTypeWiseCountState() {
+		List<FacilityDTO> result;
+		try {
+			result = mprReportsService.reportDownloadTypeWiseCountState();
+			return new ResponseEntity< List<FacilityDTO>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }

@@ -327,4 +327,14 @@ public class OverViewController {
 		return new ResponseEntity<List<FaqDTO>>(result, HttpStatus.OK);
 	}
 
+	@GetMapping("/stateWiseOverViewMapData")
+	public ResponseEntity<List<FacilityDTO>> stateWiseOverViewMapData() {
+		List<FacilityDTO> result;
+		try {
+			result = overViewService.stateWiseOverViewMapData();
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
 }

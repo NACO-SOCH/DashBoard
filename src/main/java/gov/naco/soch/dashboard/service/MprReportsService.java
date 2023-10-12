@@ -1,5 +1,7 @@
 package gov.naco.soch.dashboard.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -7,7 +9,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.math.BigInteger;
+import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.repository.MprReportsRepository;
 
 @Service
@@ -166,4 +169,39 @@ public class MprReportsService {
 		 return mprReportsRepository.offlineStateWise(stateid);
 	 }
 	 
+	public List<FacilityDTO> reportDownloadTypeWiseCount(){
+			
+		List<Object[]> dashBoardOverviewList = mprReportsRepository.reportDownloadTypeWiseCount();
+		List<FacilityDTO> facilityDTOList = new ArrayList<>();
+			try {
+			    for (Object[] row : dashBoardOverviewList) {
+			        FacilityDTO facilityDTO = new FacilityDTO();
+			        facilityDTO.setName((String) row[0]);
+			        facilityDTO.setDownloadCount( ((BigInteger) row[1]).longValue());
+			        facilityDTOList.add(facilityDTO);
+			    }
+			 }catch(Exception e) {
+			  logger.info(e.getMessage());
+			 }
+			    return facilityDTOList;
+	  }
+	
+	public List<FacilityDTO> reportDownloadTypeWiseCountState(){
+		
+		List<Object[]> dashBoardOverviewList = mprReportsRepository.reportDownloadTypeWiseCountState();
+		List<FacilityDTO> facilityDTOList = new ArrayList<>();
+			try {
+			    for (Object[] row : dashBoardOverviewList) {
+			        FacilityDTO facilityDTO = new FacilityDTO();
+			        facilityDTO.setName((String) row[0]);
+			        facilityDTO.setStateName((String) row[1]);
+			        facilityDTO.setStateId((Integer) row[2]);
+			        facilityDTO.setDownloadCount( ((BigInteger) row[3]).longValue());
+			        facilityDTOList.add(facilityDTO);
+			    }
+			 }catch(Exception e) {
+			  logger.info(e.getMessage());
+			 }
+			    return facilityDTOList;
+	  }
 }

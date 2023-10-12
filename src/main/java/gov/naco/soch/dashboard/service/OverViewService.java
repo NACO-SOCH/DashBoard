@@ -228,4 +228,25 @@ public class OverViewService {
 		  
 		  return faqDTOList;
 	}
+	
+	public List<FacilityDTO> stateWiseOverViewMapData(){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.stateWiseOverViewMapData();
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setId((Integer) row[0]);
+		        facilityDTO.setDateTime((Date) row[1]); 
+		        facilityDTO.setCount((Integer) row[2]);
+		        facilityDTO.setLoginCount((Integer) row[3]);
+		        facilityDTO.setStateId((Integer) row[4]);
+		        facilityDTO.setName((String) row[5]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+  }
 }
