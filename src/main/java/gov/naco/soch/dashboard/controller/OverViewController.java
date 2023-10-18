@@ -44,7 +44,8 @@ public class OverViewController {
 		}
 		return new ResponseEntity<Integer>(resultCount, HttpStatus.OK);
 	}
-
+	
+	
 	@GetMapping("/beneficiaryAddedRealTime")
 	public ResponseEntity<Integer> beneficiaryAddedRealTime() {
 		Integer resultCount;
