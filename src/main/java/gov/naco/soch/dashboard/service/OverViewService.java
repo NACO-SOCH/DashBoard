@@ -153,11 +153,13 @@ public class OverViewService {
 		return dashBoardOverViewRepo.realTimeUserViaState(stateId);
 	}
 	
+	
 	public List<FacilityDTO> loginUsage(Integer stateId){
 		
 		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginUsage(stateId);
 		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
 		  try {
+			  logger.info("Generated SQL Query: " + dashBoardOverViewRepo.loginUsage(0));
 		    for (Object[] row : dashBoardOverviewList) {
 		        FacilityDTO facilityDTO = new FacilityDTO();
 		        facilityDTO.setFacilityTypeId((Integer) row[0]);
@@ -170,6 +172,25 @@ public class OverViewService {
 		    }
 		    return facilityDTOList;
     }
+	
+	public List<FacilityDTO> loginUsage1(Integer stateId){
+		
+		  List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.loginUsage1(stateId);
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+//			  logger.info("Generated SQL Query: " + dashBoardOverViewRepo.loginUsage(0));
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setFacilityTypeId((Integer) row[0]);
+		        facilityDTO.setCount((Integer) row[1]);
+		        facilityDTO.setDateTime((Date) row[2]); 
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+  }
 	
 	public List<GeoMappingDTO> geoMapping(){
 		

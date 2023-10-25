@@ -12,16 +12,12 @@ public class FacilityDTO {
 	private Integer facilityTypeId;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer count;
-
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String name;
-
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date dateTime;
-
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer activeUsers;
-	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer loginCount;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
