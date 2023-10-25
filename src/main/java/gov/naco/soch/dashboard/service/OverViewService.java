@@ -33,6 +33,7 @@ public class OverViewService {
 		return dashBoardOverViewRepo.testingRealTimeCount();
 	}
 	
+	
 	public Integer beneficiaryAddedRealTime() {
 		return dashBoardOverViewRepo.beneficiaryAddedRealTime();
 	}
