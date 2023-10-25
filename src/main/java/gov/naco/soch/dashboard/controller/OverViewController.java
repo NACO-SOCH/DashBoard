@@ -294,6 +294,17 @@ public class OverViewController {
 		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 	}
 	
+	@GetMapping("/loginUsage1/{stateId}")
+	public ResponseEntity<List<FacilityDTO>> loginUsage1(@PathVariable Integer stateId) {
+		List<FacilityDTO> result;
+		try {
+			result = overViewService.loginUsage1(stateId);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
+	
 	@GetMapping("/geoMapping")
 	public ResponseEntity<List<GeoMappingDTO>> geoMapping() {
 		List<GeoMappingDTO> result;
