@@ -41,27 +41,46 @@ public class ReportsController {
 	ReportsService reportsService;
 	
 	@GetMapping("/loginCount")
-	public ResponseEntity<List<Object[]>> getloginCount(
-		@RequestParam Integer stateId,
-	    @RequestParam String startDate,
-	    @RequestParam String endDate,
-	    @RequestParam Integer facilityId,
-	    @RequestParam Integer facilityTypeId,
-	    @RequestParam Integer DistrictId) throws ParseException {
+    public ResponseEntity<List<Object[]>> getloginCount(
+        @RequestParam Integer stateId,
+        @RequestParam String startDate,
+        @RequestParam String endDate,
+        @RequestParam Integer facilityId,
+        @RequestParam Integer facilityTypeId,
+        @RequestParam Integer DistrictId) throws ParseException {
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    Date parsedStartDate = dateFormat.parse(startDate);
-	    Date parsedEndDate = dateFormat.parse(endDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedStartDate = dateFormat.parse(startDate);
+        Date parsedEndDate = dateFormat.parse(endDate);
 
-	    List<Object[]> allData = new ArrayList<>(reportsService.getLoginCount(stateId, parsedStartDate, parsedEndDate, facilityId, facilityTypeId, DistrictId));
+        List<Object[]> allData = new ArrayList<>(reportsService.getLoginCount(stateId, parsedStartDate, parsedEndDate, facilityId, facilityTypeId, DistrictId));
 
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.add("X-Total-Records", String.valueOf(allData.size()));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
 
-	    return ResponseEntity.ok()
-	            .headers(headers)
-	            .body(allData);
-	}
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+    }
+	
+	@GetMapping("/loginCountState")
+    public ResponseEntity<List<Object[]>> getloginCountState(
+        @RequestParam String startDate,
+        @RequestParam String endDate) throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedStartDate = dateFormat.parse(startDate);
+        Date parsedEndDate = dateFormat.parse(endDate);
+
+        List<Object[]> allData = new ArrayList<>(reportsService.getLoginCountState( parsedStartDate, parsedEndDate));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+    }
 	
 
 	@GetMapping("/ComprehensiveloginReport")

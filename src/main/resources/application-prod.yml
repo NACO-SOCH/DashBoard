@@ -12,14 +12,18 @@ spring:
          hibernate.cache.use_second_level_cache: false
          hibernate.cache.use_query_cache: true
          hibernate.generate_statistics: false
-   datasource:
-       type: com.zaxxer.hikari.HikariDataSource
-       #dataSourceClassName: org.postgresql.Driver
-       url: jdbc:postgresql://10.247.185.11:9999/soch_stag_app_db?currentSchema=soch
-       username: soch_stag_app_user
-       password: S0chApP2020
-       hikari:
+         
+         
+     datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      #dataSourceClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/soch-db-dev?currentSchema=soch
+      username: postgres
+      password: postgres
+      hikari:
         poolName: Hikari
+        maximum-pool-size: 500
+        connectionTimeout: 30000
 logging:
    level:
        root: error
