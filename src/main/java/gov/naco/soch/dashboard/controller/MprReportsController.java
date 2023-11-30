@@ -611,22 +611,22 @@ public class MprReportsController {
 	}
 	
 	@GetMapping("/offlineCountNational")
-	public ResponseEntity<Integer> offlineCountNational() {
-		Integer result;
+	public ResponseEntity<List<FacilityDTO>> offlineCountNational() {
+		List<FacilityDTO> result;;
 		try {
 			result = mprReportsService.offlineCountNational();
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+			return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@GetMapping("/offlineStateWise/{stateId}")
-	public ResponseEntity<Integer> offlineStateWise(@PathVariable Integer stateId) {
-		Integer result;
+	public ResponseEntity<List<FacilityDTO>> offlineStateWise(@PathVariable Integer stateId) {
+		List<FacilityDTO> result;
 		try {
 			result = mprReportsService.offlineStateWise(stateId);
-			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+			return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -643,15 +643,26 @@ public class MprReportsController {
 		}
 	}
 	
-	@GetMapping("/reportDownloadTypeWiseCountState")
-	public ResponseEntity<List<FacilityDTO>> reportDownloadTypeWiseCountState() {
+	@GetMapping("/reportDownloadTypeWiseCountState/{stateId}")
+	public ResponseEntity<List<FacilityDTO>> reportDownloadTypeWiseCountState(@PathVariable Integer stateId) {
 		List<FacilityDTO> result;
 		try {
-			result = mprReportsService.reportDownloadTypeWiseCountState();
+			result = mprReportsService.reportDownloadTypeWiseCountState(stateId);
 			return new ResponseEntity< List<FacilityDTO>>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 
+	@GetMapping("/reportDownloadTypeWiseCountStateOffline")
+	public ResponseEntity<List<FacilityDTO>> reportDownloadTypeWiseCountStateOffline() {
+		List<FacilityDTO> result;
+		try {
+			result = mprReportsService.reportDownloadTypeWiseCountStateOffline();
+			return new ResponseEntity< List<FacilityDTO>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

@@ -161,12 +161,42 @@ public class MprReportsService {
 		 return mprReportsRepository.mprCountStateWise(stateid);
 	 }
 	 
-	 public int offlineCountNational() {
-		 return mprReportsRepository.offlineCountNational();
+	 public List<FacilityDTO> offlineCountNational() {
+		 List<Object[]> dashBoardOverviewList = mprReportsRepository.offlineCountNational();
+		 List<FacilityDTO> facilityDTOList = new ArrayList<>();
+			try {
+			    for (Object[] row : dashBoardOverviewList) {
+			        FacilityDTO facilityDTO = new FacilityDTO();
+			        facilityDTO.setName((String) row[0]);
+//			        facilityDTO.setCount( (Integer)row[1]);
+//			        facilityDTOList.add(facilityDTO);
+			        BigInteger count = (BigInteger) row[1];
+		            facilityDTO.setCount(count.intValue());
+			        facilityDTOList.add(facilityDTO);
+			    }
+			 }catch(Exception e) {
+			  logger.info(e.getMessage());
+			 }
+		 return facilityDTOList;
 	 }
 
-	 public int offlineStateWise (Integer stateid) {
-		 return mprReportsRepository.offlineStateWise(stateid);
+	 //change
+	 public List<FacilityDTO> offlineStateWise (Integer stateid) {
+		 List<Object[]> dashBoardOverviewList = mprReportsRepository.offlineStateWise(stateid);
+			List<FacilityDTO> facilityDTOList = new ArrayList<>();
+			try {
+			    for (Object[] row : dashBoardOverviewList) {
+			        FacilityDTO facilityDTO = new FacilityDTO();
+			        facilityDTO.setName((String) row[0]);
+//			        facilityDTO.setCount( (Integer)row[1]);
+			        BigInteger count = (BigInteger) row[1];
+		            facilityDTO.setCount(count.intValue());
+			        facilityDTOList.add(facilityDTO);
+			    }
+			 }catch(Exception e) {
+			  logger.info(e.getMessage());
+			 }
+			    return facilityDTOList;
 	 }
 	 
 	public List<FacilityDTO> reportDownloadTypeWiseCount(){
@@ -186,17 +216,42 @@ public class MprReportsService {
 			    return facilityDTOList;
 	  }
 	
-	public List<FacilityDTO> reportDownloadTypeWiseCountState(){
+	public List<FacilityDTO> reportDownloadTypeWiseCountState(Integer stateid){
+	    List<Object[]> dashBoardOverviewList = mprReportsRepository.reportDownloadTypeWiseCountState(stateid);
+	    List<FacilityDTO> facilityDTOList = new ArrayList<>();
+	    
+	    try {
+	    	for (Object[] row : dashBoardOverviewList) {
+	            FacilityDTO facilityDTO = new FacilityDTO();
+
+	            // Convert Object to String
+	            facilityDTO.setName(row[0] != null ? row[0].toString() : null);
+
+	            // Access the correct index for download_count (column 1)
+	            BigInteger count = (BigInteger) row[1];
+	            facilityDTO.setCount(count.intValue());
+	            
+	            facilityDTOList.add(facilityDTO);
+	        }
+	    } catch (Exception e) {
+	        logger.info(e.getMessage());
+	    }
+	    
+	    return facilityDTOList;
+	}
+
+	
+	
+	
+	public List<FacilityDTO> reportDownloadTypeWiseCountStateOffline(){
 		
-		List<Object[]> dashBoardOverviewList = mprReportsRepository.reportDownloadTypeWiseCountState();
+		List<Object[]> dashBoardOverviewList = mprReportsRepository.reportDownloadTypeWiseCountStateOffline();
 		List<FacilityDTO> facilityDTOList = new ArrayList<>();
 			try {
 			    for (Object[] row : dashBoardOverviewList) {
 			        FacilityDTO facilityDTO = new FacilityDTO();
-			        facilityDTO.setName((String) row[0]);
-			        facilityDTO.setStateName((String) row[1]);
-			        facilityDTO.setStateId((Integer) row[2]);
-			        facilityDTO.setDownloadCount( ((BigInteger) row[3]).longValue());
+			        facilityDTO.setStateName((String) row[0]);
+			        facilityDTO.setDownloadCount( ((BigInteger) row[1]).longValue());
 			        facilityDTOList.add(facilityDTO);
 			    }
 			 }catch(Exception e) {

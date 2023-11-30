@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.dashboard.DTO.FaqDTO;
 import gov.naco.soch.dashboard.DTO.GeoMappingDTO;
@@ -142,7 +144,7 @@ public class OverViewService {
 	}
 	
 	public Integer vlTestingStateWise(Integer stateId) {
-		return dashBoardOverViewRepo.artDispensationStateWise(stateId);
+		return dashBoardOverViewRepo.vlTestingStateWise(stateId);
 	}
 	
 	public Integer hivTestRealTime(Integer stateId) {
@@ -271,4 +273,40 @@ public class OverViewService {
 		    }
 		    return facilityDTOList;
   }
+	
+	public List<FacilityDTO>  overViewFacilityTile(Integer stateId){
+		 List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.overViewFacilityTile(stateId);
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setName((String) row[0]);
+		        facilityDTO.setCount((Integer) row[1]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+	}
+	
+	public List<FacilityDTO>  facilityCount(Integer stateId){
+		 List<Object[]> dashBoardOverviewList = dashBoardOverViewRepo.facilityCount(stateId);
+		  List<FacilityDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		        FacilityDTO facilityDTO = new FacilityDTO();
+		        facilityDTO.setCount((Integer) row[0]);
+		        facilityDTO.setName((String) row[1]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
+	}
+	
+	
+	
+	
 }

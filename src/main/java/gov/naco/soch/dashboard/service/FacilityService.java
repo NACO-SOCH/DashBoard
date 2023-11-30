@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import gov.naco.soch.dashboard.DTO.CoverageDTO;
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.repository.DashBoardFacilityRepo;
 import gov.naco.soch.singelton.LoggerSingleton;
@@ -177,5 +179,25 @@ public class FacilityService {
 		    return facilityDTOList;
 
     }
+    
+    public List<CoverageDTO> facilityCoverage(Integer stateId, String type) {
+        List<Object[]> dashBoardOverviewList = dashBoardFacilityRepo.facilityCoverage(stateId,type);
+		  List<CoverageDTO> facilityDTOList = new ArrayList<>();
+		  try {
+		    for (Object[] row : dashBoardOverviewList) {
+		    	CoverageDTO facilityDTO = new CoverageDTO();
+		        facilityDTO.setYear((Integer) row[0]);
+		        facilityDTO.setMonth((Integer) row[1]);
+		        facilityDTO.setCoverage1((String) row[2]);
+		        facilityDTO.setCoverage2((String) row[3]);
+		        facilityDTO.setCoverage3((String) row[4]);
+		        facilityDTOList.add(facilityDTO);
+		    }
+		  }catch(Exception e) {
+		    	logger.info(e.getMessage());
+		    }
+		    return facilityDTOList;
 
+    }
+    
 }

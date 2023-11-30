@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gov.naco.soch.dashboard.DTO.CoverageDTO;
 import gov.naco.soch.dashboard.DTO.FacilityDTO;
 import gov.naco.soch.dashboard.service.FacilityService;
 
@@ -147,7 +149,16 @@ public class FacilityController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 	
-	
+    @GetMapping("/facilityCoverage/{stateId}/{type}")
+    public ResponseEntity<List<CoverageDTO>> facilityCoverage(@PathVariable Integer stateId,@PathVariable String type) {
+        try {
+            List<CoverageDTO> result = facilityService.facilityCoverage(stateId,type);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 	
 }
