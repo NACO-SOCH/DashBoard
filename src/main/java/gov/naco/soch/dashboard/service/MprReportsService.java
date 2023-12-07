@@ -228,8 +228,7 @@ public class MprReportsService {
 	            facilityDTO.setName(row[0] != null ? row[0].toString() : null);
 
 	            // Access the correct index for download_count (column 1)
-	            BigInteger count = (BigInteger) row[1];
-	            facilityDTO.setCount(count.intValue());
+	            facilityDTO.setDownloadCount( ((BigInteger) row[1]).longValue());;
 	            
 	            facilityDTOList.add(facilityDTO);
 	        }
