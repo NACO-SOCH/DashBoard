@@ -78,5 +78,9 @@ public class ReportsService {
 	public Stream<Object[]>getdispensationReport(Integer facilityId, Date startDate, Date endDate) {
 		   return reportsRepository.getdispensationReport(facilityId, startDate, endDate).stream();			
 	}
+	
+	public List<Object[]>getWeeklyReport(Date date) {
+        return reportsRepository.getWeeklyReport( date);
+    }
 
 }

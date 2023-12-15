@@ -540,5 +540,22 @@ public class ReportsController {
 	            .body(outputStream.toByteArray());
 	}
 	
+	@GetMapping("/WeeklyReport")
+    public ResponseEntity<List<Object[]>> getWeeklyReport(
+        @RequestParam String date) throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parseddate = dateFormat.parse(date);
+
+        List<Object[]> allData = new ArrayList<>(reportsService.getWeeklyReport(parseddate));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+    }
+	
 	
 }
