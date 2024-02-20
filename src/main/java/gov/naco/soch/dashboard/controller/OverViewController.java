@@ -349,4 +349,42 @@ public class OverViewController {
 		}
 		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 	}
+	
+	
+	// New APIs 22Nov
+	
+	@GetMapping("/overviewFacilityTile/{stateId}")
+	public ResponseEntity<List<FacilityDTO>> overViewFacilityTile(@PathVariable Integer stateId) {
+		List<FacilityDTO> result;
+		try {
+			result = overViewService.overViewFacilityTile(stateId);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/facilityCount/{stateId}")
+	public ResponseEntity<List<FacilityDTO>> facilityCount(@PathVariable Integer stateId) {
+		List<FacilityDTO> result;
+		try {
+			result = overViewService.facilityCount(stateId);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/positiveCurrentIctc")
+	public ResponseEntity<Integer> positiveCurrentIctc() {
+		Integer result;
+		try {
+			result = overViewService.positiveCurrentIctc();
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
 }
