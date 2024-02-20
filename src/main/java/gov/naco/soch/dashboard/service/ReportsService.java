@@ -84,7 +84,7 @@ public class ReportsService {
 	}
 	
 	public List<Object[]>getWeeklyReport(Date date) {
-<<<<<<< HEAD
+
 		return reportsRepository.getWeeklyReport( date);
         }
 	
@@ -166,6 +166,7 @@ public class ReportsService {
 	public Stream<Object[]>getStockOutSACSExcel(String stateName) {
 		   return reportsRepository.getStockOutSACSExcel(stateName).stream();			
 	}
+
         return reportsRepository.getWeeklyReport( date);
     }
 	

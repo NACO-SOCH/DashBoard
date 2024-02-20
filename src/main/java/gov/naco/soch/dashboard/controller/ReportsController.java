@@ -709,7 +709,6 @@ public class ReportsController {
                 .body(outputStream.toByteArray());
     }
 	
-	
 	@GetMapping("/WeeklyReport")
     public ResponseEntity<List<Object[]>> getWeeklyReport(
         @RequestParam String date) throws ParseException {
