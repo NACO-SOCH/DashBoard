@@ -306,6 +306,11 @@ public class OverViewService {
 		    return facilityDTOList;
 	}
 	
+	public Integer positiveCurrentIctc() {
+		return dashBoardOverViewRepo.positiveCurrentIctc();
+	}
+	
+	
 	
 	
 	

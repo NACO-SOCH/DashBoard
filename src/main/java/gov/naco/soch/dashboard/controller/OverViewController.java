@@ -374,4 +374,17 @@ public class OverViewController {
 		}
 		return new ResponseEntity<List<FacilityDTO>>(result, HttpStatus.OK);
 	}
+	
+	@GetMapping("/positiveCurrentIctc")
+	public ResponseEntity<Integer> positiveCurrentIctc() {
+		Integer result;
+		try {
+			result = overViewService.positiveCurrentIctc();
+			return new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
 }

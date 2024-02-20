@@ -557,5 +557,153 @@ public class ReportsController {
                 .body(allData);
     }
 	
+	@GetMapping("/ArtDispensationReport")
+    public ResponseEntity<byte[]> getArtDispensationReport(
+        @RequestParam Integer facilityId,
+        @RequestParam String startDate,
+        @RequestParam String endDate,
+        @RequestParam(defaultValue = "0") Integer page,
+        @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedStartDate = dateFormat.parse(startDate);
+        Date parsedEndDate = dateFormat.parse(endDate);
+
+        SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+        String currentDate = currentDateFormatter.format(new Date());
+
+        String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+        List<Object[]> allData = (reportsService.getArtDispensationReport(facilityId, parsedStartDate, parsedEndDate))
+                .collect(Collectors.toList());
+        int totalRecords = allData.size();
+        int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+        Stream<Object[]> chunkDataStream = allData.stream()
+                .skip(page * pageSize)
+                .limit(totalRecords);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(totalRecords));
+        headers.add("X-Total-Pages", String.valueOf(totalPages));
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "ArtDispensation.xlsx");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        try (InputStream templateStream = getClass().getResourceAsStream("/ArtDispensation.xlsx");
+             Workbook workbook = WorkbookFactory.create(templateStream)) {
+                 
+            
+            Sheet sheet = workbook.getSheet("Sheet1");    
+            int rowIdx = sheet.getLastRowNum() + 1;
+            CellStyle numericCellStyle = workbook.createCellStyle();
+            DataFormat dataFormat = workbook.createDataFormat();
+            numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+            for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+                Row row = sheet.createRow(rowIdx++);
+                int cellIdx = 0;
+                for (Object cellData : rowData) {
+                    Cell cell = row.createCell(cellIdx++);
+                    if (cellData != null) {
+                        if (cellData instanceof Number) {
+                            cell.setCellValue(((Number) cellData).doubleValue());
+                            cell.setCellStyle(numericCellStyle);
+                        } else {                            
+                            cell.setCellValue(cellData.toString());
+                        }
+                    } else {
+                       
+                        cell.setCellValue(""); 
+                    }
+                }
+            }
+            Row paramsRow = sheet.createRow(rowIdx++ + 2);
+            paramsRow.createCell(0).setCellValue(reportPeriod);
+
+            Row currentDateRow = sheet.createRow(rowIdx++);
+            currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+            workbook.setForceFormulaRecalculation(true); 
+
+            workbook.write(outputStream);
+        }
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(outputStream.toByteArray());
+    }
+    
+    
+    @GetMapping("/GCPWReport")
+    public ResponseEntity<byte[]> GCPWReport(
+        @RequestParam String startDate,
+        @RequestParam String endDate,
+        @RequestParam(defaultValue = "0") Integer page,
+        @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedStartDate = dateFormat.parse(startDate);
+        Date parsedEndDate = dateFormat.parse(endDate);
+
+        SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+        String currentDate = currentDateFormatter.format(new Date());
+
+        String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+        List<Object[]> allData = (reportsService.getGCPWReport( parsedStartDate, parsedEndDate))
+                .collect(Collectors.toList());
+        int totalRecords = allData.size();
+        int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+        Stream<Object[]> chunkDataStream = allData.stream()
+                .skip(page * pageSize)
+                .limit(totalRecords);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(totalRecords));
+        headers.add("X-Total-Pages", String.valueOf(totalPages));
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "GC_PW_LL.xlsx");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        try (InputStream templateStream = getClass().getResourceAsStream("/GC_PW_LL.xlsx");
+             Workbook workbook = WorkbookFactory.create(templateStream)) {
+                 
+            
+            Sheet sheet = workbook.getSheet("Sheet1");    
+            int rowIdx = sheet.getLastRowNum() + 1;
+            CellStyle numericCellStyle = workbook.createCellStyle();
+            DataFormat dataFormat = workbook.createDataFormat();
+            numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+            for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+                Row row = sheet.createRow(rowIdx++);
+                int cellIdx = 0;
+                for (Object cellData : rowData) {
+                    Cell cell = row.createCell(cellIdx++);
+                    if (cellData != null) {
+                        if (cellData instanceof Number) {
+                            cell.setCellValue(((Number) cellData).doubleValue());
+                            cell.setCellStyle(numericCellStyle);
+                        } else {                            
+                            cell.setCellValue(cellData.toString());
+                        }
+                    } else {
+                       
+                        cell.setCellValue(""); 
+                    }
+                }
+            }
+            Row paramsRow = sheet.createRow(rowIdx++ + 2);
+            paramsRow.createCell(0).setCellValue(reportPeriod);
+
+            Row currentDateRow = sheet.createRow(rowIdx++);
+            currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+            workbook.setForceFormulaRecalculation(true); 
+
+            workbook.write(outputStream);
+        }
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(outputStream.toByteArray());
+    }
+	
 	
 }
