@@ -7,7 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,7 +20,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import gov.naco.soch.dashboard.service.ReportsService;
 
@@ -705,5 +709,399 @@ public class ReportsController {
                 .body(outputStream.toByteArray());
     }
 	
+	@GetMapping("/WeeklyReport")
+    public ResponseEntity<List<Object[]>> getWeeklyReport(
+        @RequestParam String date) throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parseddate = dateFormat.parse(date);
+
+        List<Object[]> allData = new ArrayList<>(reportsService.getWeeklyReport(parseddate));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+    }
 	
+	
+	@GetMapping("/ArtDispensationReport")
+	public ResponseEntity<byte[]> getArtDispensationReport(
+		@RequestParam Integer facilityId,
+	    @RequestParam String startDate,
+	    @RequestParam String endDate,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date parsedStartDate = dateFormat.parse(startDate);
+	    Date parsedEndDate = dateFormat.parse(endDate);
+
+	    SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+	    String currentDate = currentDateFormatter.format(new Date());
+
+	    String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+	    List<Object[]> allData = (reportsService.getArtDispensationReport(facilityId, parsedStartDate, parsedEndDate))
+	            .collect(Collectors.toList());
+	    int totalRecords = allData.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+	    Stream<Object[]> chunkDataStream = allData.stream()
+	            .skip(page * pageSize)
+	            .limit(totalRecords);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("X-Total-Records", String.valueOf(totalRecords));
+	    headers.add("X-Total-Pages", String.valueOf(totalPages));
+	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	    headers.setContentDispositionFormData("attachment", "ArtDispensation.xlsx");
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+	    try (InputStream templateStream = getClass().getResourceAsStream("/ArtDispensation.xlsx");
+	         Workbook workbook = WorkbookFactory.create(templateStream)) {
+	    		 
+	    	
+	    	Sheet sheet = workbook.getSheet("Sheet1");    
+	        int rowIdx = sheet.getLastRowNum() + 1;
+	        CellStyle numericCellStyle = workbook.createCellStyle();
+	        DataFormat dataFormat = workbook.createDataFormat();
+	        numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+	        for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+	            Row row = sheet.createRow(rowIdx++);
+	            int cellIdx = 0;
+	            for (Object cellData : rowData) {
+	                Cell cell = row.createCell(cellIdx++);
+	                if (cellData != null) {
+	                    if (cellData instanceof Number) {
+	                        cell.setCellValue(((Number) cellData).doubleValue());
+	                        cell.setCellStyle(numericCellStyle);
+	                    } else {	                        
+	                        cell.setCellValue(cellData.toString());
+	                    }
+	                } else {
+	                   
+	                    cell.setCellValue(""); 
+	                }
+	            }
+	        }
+	        Row paramsRow = sheet.createRow(rowIdx++ + 2);
+	        paramsRow.createCell(0).setCellValue(reportPeriod);
+
+	        Row currentDateRow = sheet.createRow(rowIdx++);
+	        currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+	        workbook.setForceFormulaRecalculation(true); 
+
+	        workbook.write(outputStream);
+	    }
+
+	    return ResponseEntity.ok()
+	            .headers(headers)
+	            .body(outputStream.toByteArray());
+	}
+	
+	
+	
+	
+	@GetMapping("/GCPWReport")
+	public ResponseEntity<byte[]> GCPWReport(
+	    @RequestParam String startDate,
+	    @RequestParam String endDate,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date parsedStartDate = dateFormat.parse(startDate);
+	    Date parsedEndDate = dateFormat.parse(endDate);
+
+	    SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+	    String currentDate = currentDateFormatter.format(new Date());
+
+	    String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+	    List<Object[]> allData = (reportsService.getGCPWReport( parsedStartDate, parsedEndDate))
+	            .collect(Collectors.toList());
+	    int totalRecords = allData.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+	    Stream<Object[]> chunkDataStream = allData.stream()
+	            .skip(page * pageSize)
+	            .limit(totalRecords);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("X-Total-Records", String.valueOf(totalRecords));
+	    headers.add("X-Total-Pages", String.valueOf(totalPages));
+	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	    headers.setContentDispositionFormData("attachment", "GC_PW_LL.xlsx");
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+	    try (InputStream templateStream = getClass().getResourceAsStream("/GC_PW_LL.xlsx");
+	         Workbook workbook = WorkbookFactory.create(templateStream)) {
+	    		 
+	    	
+	    	Sheet sheet = workbook.getSheet("Sheet1");    
+	        int rowIdx = sheet.getLastRowNum() + 1;
+	        CellStyle numericCellStyle = workbook.createCellStyle();
+	        DataFormat dataFormat = workbook.createDataFormat();
+	        numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+	        for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+	            Row row = sheet.createRow(rowIdx++);
+	            int cellIdx = 0;
+	            for (Object cellData : rowData) {
+	                Cell cell = row.createCell(cellIdx++);
+	                if (cellData != null) {
+	                    if (cellData instanceof Number) {
+	                        cell.setCellValue(((Number) cellData).doubleValue());
+	                        cell.setCellStyle(numericCellStyle);
+	                    } else {	                        
+	                        cell.setCellValue(cellData.toString());
+	                    }
+	                } else {
+	                   
+	                    cell.setCellValue(""); 
+	                }
+	            }
+	        }
+	        Row paramsRow = sheet.createRow(rowIdx++ + 2);
+	        paramsRow.createCell(0).setCellValue(reportPeriod);
+
+	        Row currentDateRow = sheet.createRow(rowIdx++);
+	        currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+	        workbook.setForceFormulaRecalculation(true); 
+
+	        workbook.write(outputStream);
+	    }
+
+	    return ResponseEntity.ok()
+	            .headers(headers)
+	            .body(outputStream.toByteArray());
+	}
+	
+	@GetMapping("/stockledgerFacReport")
+	public ResponseEntity<byte[]> StockLedger(
+	    @RequestParam String startdate,
+	    @RequestParam String enddate,
+	    @RequestParam Integer facilityId,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    Date parsedStartDate = dateFormat.parse(startdate);
+	    Date parsedEndDate = dateFormat.parse(enddate);
+
+	    SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+	    String currentDate = currentDateFormatter.format(new Date());
+
+	    String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+	    List<Object[]> allData = (reportsService.getStockLedgerFac( facilityId, parsedStartDate, parsedEndDate))
+	            .collect(Collectors.toList());
+	    int totalRecords = allData.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+	    Stream<Object[]> chunkDataStream = allData.stream()
+	            .skip(page * pageSize)
+	            .limit(totalRecords);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("X-Total-Records", String.valueOf(totalRecords));
+	    headers.add("X-Total-Pages", String.valueOf(totalPages));
+	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	    headers.setContentDispositionFormData("attachment", "StockLedgerFacility.xlsx");
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+	    try (InputStream templateStream = getClass().getResourceAsStream("/StockLedgerFacility.xlsx");
+	         Workbook workbook = WorkbookFactory.create(templateStream)) {
+	    		 
+	    	
+	    	Sheet sheet = workbook.getSheet("Sheet1");    
+	        int rowIdx = sheet.getLastRowNum() + 1;
+	        CellStyle numericCellStyle = workbook.createCellStyle();
+	        DataFormat dataFormat = workbook.createDataFormat();
+	        numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+	        for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+	            Row row = sheet.createRow(rowIdx++);
+	            int cellIdx = 0;
+	            for (Object cellData : rowData) {
+	                Cell cell = row.createCell(cellIdx++);
+	                if (cellData != null) {
+	                    if (cellData instanceof Number) {
+	                        cell.setCellValue(((Number) cellData).doubleValue());
+	                        cell.setCellStyle(numericCellStyle);
+	                    } else {	                        
+	                        cell.setCellValue(cellData.toString());
+	                    }
+	                } else {
+	                   
+	                    cell.setCellValue(""); 
+	                }
+	            }
+	        }
+	        Row paramsRow = sheet.createRow(rowIdx++ + 2);
+	        paramsRow.createCell(0).setCellValue(reportPeriod);
+
+	        Row currentDateRow = sheet.createRow(rowIdx++);
+	        currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+	        workbook.setForceFormulaRecalculation(true); 
+
+	        workbook.write(outputStream);
+	    }
+
+	    return ResponseEntity.ok()
+	            .headers(headers)
+	            .body(outputStream.toByteArray());
+	}
+	
+	@GetMapping("/stockledgerSacsReport")
+	public ResponseEntity <List<Object[]>>StockLedgerSacs(
+	    @RequestParam String stateName,
+	    @RequestParam (required = false)String districtName,
+	    @RequestParam (required = false)String facilityType,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    List<Object[]> allData = new ArrayList<>(reportsService.getStockLedgerSACS(stateName,districtName,facilityType));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+	}	
+	
+	@GetMapping("/getstockExpirySACS")
+	public ResponseEntity <List<Object[]>>stockExpirySACS(
+	    @RequestParam String stateName,
+	    @RequestParam (required = false)String districtName,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    List<Object[]> allData = new ArrayList<>(reportsService.getstockExpirySACS(stateName,districtName));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+	}	
+	@GetMapping("/getstockExpiryFacility")
+	public ResponseEntity <List<Object[]>>stockExpiryFac(
+	    @RequestParam Integer facilityId,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    List<Object[]> allData = new ArrayList<>(reportsService.getstockExpiryFac(facilityId));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Records", String.valueOf(allData.size()));
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(allData);
+	}	
+	
+	@GetMapping("/stockOutFacReport")
+	public ResponseEntity<Map<String, Object>> stockOutFacReport(
+	        @RequestParam Integer facilityId,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "10") int size) {
+
+	    Pageable pageable = PageRequest.of(page, size);
+	    Page<Object[]> pageData = reportsService.getStockOutFacility(facilityId, pageable);
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("data", pageData.getContent());
+	    response.put("totalRecords", pageData.getTotalElements());
+	    response.put("currentPage", pageData.getNumber());
+	    response.put("totalPages", pageData.getTotalPages());
+
+	    return ResponseEntity.ok().body(response);
+	}
+
+
+	
+	@GetMapping("/stockOutSacsReport")
+	public ResponseEntity<Map<String, Object>> stockOutSACS(
+	        @RequestParam String stateName,
+	        @RequestParam(required = false) String districtName,
+	        @RequestParam(required = false) String facilityType,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "10") int pageSize) throws ParseException, IOException {
+
+	    Page<Object[]> pageData = reportsService.getStockOutSACS(stateName, districtName, facilityType, page, pageSize);
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("data", pageData.getContent());
+	    response.put("currentPage", pageData.getNumber());
+	    response.put("totalItems", pageData.getTotalElements());
+	    response.put("totalPages", pageData.getTotalPages());
+
+	    return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("/stockOutSacsExcel")
+	public ResponseEntity<byte[]> stockOutSACSExcel(
+	    @RequestParam String stateName,
+	    @RequestParam(defaultValue = "0") Integer page,
+	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
+
+	    List<Object[]> allData = (reportsService.getStockOutSACSExcel( stateName))
+	            .collect(Collectors.toList());
+	    int totalRecords = allData.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+	    Stream<Object[]> chunkDataStream = allData.stream()
+	            .skip(page * pageSize)
+	            .limit(totalRecords);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("X-Total-Records", String.valueOf(totalRecords));
+	    headers.add("X-Total-Pages", String.valueOf(totalPages));
+	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	    headers.setContentDispositionFormData("attachment", "Stock_Out_SACS.xlsx");
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+	    try (InputStream templateStream = getClass().getResourceAsStream("/Stock_Out_SACS.xlsx");
+	         Workbook workbook = WorkbookFactory.create(templateStream)) {
+	    		 
+	    	
+	    	Sheet sheet = workbook.getSheet("Sheet1");    
+	        int rowIdx = sheet.getLastRowNum() + 1;
+	        CellStyle numericCellStyle = workbook.createCellStyle();
+	        DataFormat dataFormat = workbook.createDataFormat();
+	        numericCellStyle.setDataFormat(dataFormat.getFormat("#0")); // Set the desired numeric format
+
+	        for (Object[] rowData : chunkDataStream.collect(Collectors.toList())) {
+	            Row row = sheet.createRow(rowIdx++);
+	            int cellIdx = 0;
+	            for (Object cellData : rowData) {
+	                Cell cell = row.createCell(cellIdx++);
+	                if (cellData != null) {
+	                    if (cellData instanceof Number) {
+	                        cell.setCellValue(((Number) cellData).doubleValue());
+	                        cell.setCellStyle(numericCellStyle);
+	                    } else {	                        
+	                        cell.setCellValue(cellData.toString());
+	                    }
+	                } else {
+	                   
+	                    cell.setCellValue(""); 
+	                }
+	            }
+	        }
+	        //Row paramsRow = sheet.createRow(rowIdx++ + 2);
+	        //paramsRow.createCell(0).setCellValue(reportPeriod);
+
+	        //Row currentDateRow = sheet.createRow(rowIdx++);
+	        //currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
+	        workbook.setForceFormulaRecalculation(true); 
+
+	        workbook.write(outputStream);
+	    }
+
+	    return ResponseEntity.ok()
+	            .headers(headers)
+	            .body(outputStream.toByteArray());
+	}
+
 }
