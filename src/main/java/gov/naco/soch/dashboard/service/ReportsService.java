@@ -166,16 +166,7 @@ public class ReportsService {
 	public Stream<Object[]>getStockOutSACSExcel(String stateName) {
 		   return reportsRepository.getStockOutSACSExcel(stateName).stream();			
 	}
-
-        return reportsRepository.getWeeklyReport( date);
-    }
 	
-	public Stream<Object[]>getArtDispensationReport(Integer facilityId, Date startDate, Date endDate) {
-        return reportsRepository.getArtDispensationReport(facilityId, startDate, endDate).stream();            
- }
-	public Stream<Object[]>getGCPWReport(Date startDate, Date endDate) {
-        return reportsRepository.getGCPWReport(startDate, endDate).stream();            
- }
 
 }
 
