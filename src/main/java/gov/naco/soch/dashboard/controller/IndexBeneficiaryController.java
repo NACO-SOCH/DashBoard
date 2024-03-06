@@ -69,9 +69,21 @@ public class IndexBeneficiaryController {
 	 }
 	 
 	 
-	 @GetMapping("/indexScreeingListBySSK")
-	 public List<BeneficiaryIndexDTO> indexScreeingListBySSK(){
-		  return indexBeneficiaryService.indexScreeingListBySSK();
+	 
+	 @GetMapping("/beneficiaryBySearch/{Id}")
+	 public List<BeneficiaryDTO> findBeneficiaryBySearch(@PathVariable("Id") Long beneficiaryId) {
+	     return indexBeneficiaryService.findBeneficiaryBySearch(beneficiaryId);
+	 }
+	 
+	 
+	 @GetMapping("/indexScreeingListBySSK/{sskid}")
+	 public List<BeneficiaryIndexDTO> indexScreeingListBySSK(@PathVariable ("sskid") Long sskid){
+		  return indexBeneficiaryService.indexScreeingListBySSK(sskid);
+	 }
+	 
+	 @GetMapping("/indexScreeingListByFacilityId")
+	 public List<BeneficiaryIndexDTO> indexScreeingListByfacilityId(){
+		  return indexBeneficiaryService.indexScreeingListByfacilityId();
 	 }
 
 	 

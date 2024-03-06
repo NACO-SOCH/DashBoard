@@ -59,14 +59,33 @@ public class IndexBeneficiaryService {
 		Long UserId = UserUtils.getLoggedInUserDetails().getUserId();
 
 		logger.info(beneficiaryIndexScreeningDTO.getScreeningDate() + "date");
-		if (beneficiaryIndexScreeningDTO.getScreeningDate() != null || beneficiaryIndexScreeningDTO.getHivScreeningResultId() != null ) {
-			indexTestingRepository.saveBeneficiaryIndexScreening(beneficiaryIndexScreeningDTO.getSskid(),
+		if ( (beneficiaryIndexScreeningDTO.getScreeningDate() != null || beneficiaryIndexScreeningDTO.getHivScreeningResultId() != null ) && beneficiaryIndexScreeningDTO.getOutReferralTo() != null ) {
+			logger.info("dd");
+			indexTestingRepository.saveBeneficiaryIndexScreening(
+					beneficiaryIndexScreeningDTO.getSskid(),
 					beneficiaryIndexScreeningDTO.getScreeningDate(),
 					beneficiaryIndexScreeningDTO.getHivScreeningResultId(),
 					beneficiaryIndexScreeningDTO.getIndexScreeningStatusId(),
-					beneficiaryIndexScreeningDTO.getOutReferralTo(), beneficiaryIndexScreeningDTO.getRemarks(), UserId,
-					UserId);
-		} else {
+					beneficiaryIndexScreeningDTO.getOutReferralTo(), 
+					beneficiaryIndexScreeningDTO.getRemarks(), 
+					UserId,
+					UserId
+					);
+		}else if(beneficiaryIndexScreeningDTO.getOutReferralTo() == null){
+			logger.info("ff");
+			
+			indexTestingRepository.saveBeneficiaryIndexScreeningNonReactive(
+					beneficiaryIndexScreeningDTO.getSskid(),
+					beneficiaryIndexScreeningDTO.getScreeningDate(),
+					beneficiaryIndexScreeningDTO.getHivScreeningResultId(),
+					beneficiaryIndexScreeningDTO.getIndexScreeningStatusId(),
+					beneficiaryIndexScreeningDTO.getRemarks(), 
+					UserId,
+					UserId
+					);
+		} 
+		else {
+			logger.info("ee");
 			indexTestingRepository.saveBeneficiaryIndexScreeningwithoutdate(
 					beneficiaryIndexScreeningDTO.getSskid(),
 					beneficiaryIndexScreeningDTO.getIndexScreeningStatusId(), 
@@ -74,7 +93,7 @@ public class IndexBeneficiaryService {
 					UserId,
 					UserId
 					);
-		}
+		} 
 	}
 
 	
@@ -126,11 +145,35 @@ public class IndexBeneficiaryService {
 
 		return resultList;
 	}
-
+	
 	
 
-	public List<BeneficiaryIndexDTO> indexScreeingListBySSK() {
-		List<Object[]> pageResult = indexTestingRepository.indexScreeingListBySSK();
+	public List<BeneficiaryDTO> findBeneficiaryBySearch(Long sskid) {
+		List<Object[]> pageResult = indexTestingRepository.findBeneficiaryBySearch(sskid);
+
+		List<BeneficiaryDTO> resultList = new ArrayList<>();
+
+		for (Object[] row : pageResult) {
+			BeneficiaryDTO beneficiaryDTO = new BeneficiaryDTO();
+
+			beneficiaryDTO.setSskid(((Integer) row[0]).longValue());
+			beneficiaryDTO.setFirstName((String) row[1]);
+			beneficiaryDTO.setMiddleName((String) row[2]);
+			beneficiaryDTO.setLastName((String) row[3]);
+			beneficiaryDTO.setPhoneNo((String) row[4]);
+			beneficiaryDTO.setScreeningDate((Date) row[5]);
+			beneficiaryDTO.setStatus((String) row[6]);
+
+			resultList.add(beneficiaryDTO);
+		}
+
+		return resultList;
+	}
+	
+	
+
+	public List<BeneficiaryIndexDTO> indexScreeingListBySSK(Long sskid) {
+		List<Object[]> pageResult = indexTestingRepository.indexScreeingListBySSK(sskid);
 
 		List<BeneficiaryIndexDTO> resultList = new ArrayList<>();
 
@@ -151,5 +194,32 @@ public class IndexBeneficiaryService {
 
 		return resultList;
 	}
+	
+	
+	
+	public List<BeneficiaryIndexDTO> indexScreeingListByfacilityId() {
+		Long facilityId = UserUtils.getLoggedInUserDetails().getFacilityId();
+		List<Object[]> pageResult = indexTestingRepository.indexScreeingListByfacilityId(facilityId);
+
+		List<BeneficiaryIndexDTO> resultList = new ArrayList<>();
+
+		for (Object[] row : pageResult) {
+			BeneficiaryIndexDTO beneficiaryDTO = new BeneficiaryIndexDTO();
+			
+//			beneficiaryDTO.setScreeningDate((LocalDate) row[0]);
+			Date sqlDate = (Date) row[0];
+	        LocalDate localDate = sqlDate.toLocalDate();
+	        beneficiaryDTO.setScreeningDate(localDate);
+
+			beneficiaryDTO.setStatus((String) row[1]);
+			beneficiaryDTO.setResult((String) row[2]);
+			beneficiaryDTO.setOutReferralTo((String) row[3]);
+			
+			resultList.add(beneficiaryDTO);
+		}
+
+		return resultList;
+	}
+	
 
 }
