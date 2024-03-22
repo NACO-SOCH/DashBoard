@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 
+import gov.naco.soch.dashboard.service.CriteriaService;
 import gov.naco.soch.dashboard.service.ReportsService;
 
 @RestController
@@ -43,6 +44,8 @@ public class ReportsController {
 
 	@Autowired
 	ReportsService reportsService;
+	@Autowired
+	CriteriaService criteriaService;
 	
 	@GetMapping("/loginCount")
     public ResponseEntity<List<Object[]>> getloginCount(
@@ -806,20 +809,19 @@ public class ReportsController {
 	
 	@GetMapping("/GCPWReport")
 	public ResponseEntity<byte[]> GCPWReport(
-	    @RequestParam String startDate,
-	    @RequestParam String endDate,
+			@RequestParam Integer stateId,
+			@RequestParam Integer districtId,
+			@RequestParam Integer facilityId,
+			@RequestParam String pidPrefix,
 	    @RequestParam(defaultValue = "0") Integer page,
 	    @RequestParam(defaultValue = "1000") Integer pageSize) throws ParseException, IOException {
 
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    Date parsedStartDate = dateFormat.parse(startDate);
-	    Date parsedEndDate = dateFormat.parse(endDate);
 
 	    SimpleDateFormat currentDateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
 	    String currentDate = currentDateFormatter.format(new Date());
 
-	    String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
-	    List<Object[]> allData = (reportsService.getGCPWReport( parsedStartDate, parsedEndDate))
+	    //String reportPeriod = "Report Period : " + formatDate(parsedStartDate) + " To " + formatDate(parsedEndDate);
+	    List<Object[]> allData = (criteriaService.getGCPWReport( stateId,districtId,facilityId,pidPrefix))
 	            .collect(Collectors.toList());
 	    int totalRecords = allData.size();
 	    int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
@@ -831,10 +833,10 @@ public class ReportsController {
 	    headers.add("X-Total-Records", String.valueOf(totalRecords));
 	    headers.add("X-Total-Pages", String.valueOf(totalPages));
 	    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-	    headers.setContentDispositionFormData("attachment", "GC_PW_LL.xlsx");
+	    headers.setContentDispositionFormData("attachment", "ICTC_Linelist.xlsx");
 	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-	    try (InputStream templateStream = getClass().getResourceAsStream("/GC_PW_LL.xlsx");
+	    try (InputStream templateStream = getClass().getResourceAsStream("/ICTC_Linelist.xlsx");
 	         Workbook workbook = WorkbookFactory.create(templateStream)) {
 	    		 
 	    	
@@ -863,7 +865,7 @@ public class ReportsController {
 	            }
 	        }
 	        Row paramsRow = sheet.createRow(rowIdx++ + 2);
-	        paramsRow.createCell(0).setCellValue(reportPeriod);
+	       // paramsRow.createCell(0).setCellValue(reportPeriod);
 
 	        Row currentDateRow = sheet.createRow(rowIdx++);
 	        currentDateRow.createCell(0).setCellValue("Report Downloaded On : " + currentDate);
@@ -876,6 +878,8 @@ public class ReportsController {
 	            .headers(headers)
 	            .body(outputStream.toByteArray());
 	}
+	
+	
 	
 	@GetMapping("/stockledgerFacReport")
 	public ResponseEntity<byte[]> StockLedger(

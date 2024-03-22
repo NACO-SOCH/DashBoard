@@ -15,6 +15,7 @@ public class AddIndexDTO {
     private String addressLine2;
     private int stateId;
     private int districtId;
+    private Long facilityId;
     private int indexTypeId;
     private int beneficiaryId;
     private String pincode;
@@ -132,5 +133,15 @@ public class AddIndexDTO {
     public void setPincode(String pincode) {
         this.pincode = pincode;
     }
+
+	public Long getFacilityId() {
+		return facilityId;
+	}
+
+	public void setFacilityId(Long facilityId) {
+		this.facilityId = facilityId;
+	}
+    
+    
 
 }

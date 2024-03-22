@@ -92,9 +92,9 @@ public class ReportsService {
 		   return reportsRepository.getArtDispensationReport(facilityId, startDate, endDate).stream();			
 	}
 	
-	public Stream<Object[]>getGCPWReport(Date startDate, Date endDate) {
-		   return reportsRepository.getGCPWReport(startDate, endDate).stream();			
-	}
+//	public Stream<Object[]>getGCPWReport(Date startDate, Date endDate) {
+//		   return reportsRepository.getGCPWReport(startDate, endDate).stream();			
+//	}
 
 	public Stream<Object[]>getStockLedgerFac(Integer facilityId,Date startdate, Date enddate) {
 			return reportsRepository.getStockLedgerFac(facilityId,startdate, enddate).stream();		   			

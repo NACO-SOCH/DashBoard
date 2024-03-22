@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import gov.naco.soch.dashboard.DTO.CoverageDTO;

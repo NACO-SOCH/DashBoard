@@ -2,12 +2,19 @@ package gov.naco.soch.dashboard.DTO;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class BeneficiaryIndexDTO {
 
 	    private LocalDate screeningDate;
 	    private String status;
 	    private String result;
 	    private String outReferralTo;
+	    
+		@JsonInclude(JsonInclude.Include.NON_NULL)
+	    private String remarks;
+		@JsonInclude(JsonInclude.Include.NON_NULL)
+	    private LocalDate createdOn;
 
 	   
 	    // Getters and Setters
@@ -43,4 +50,22 @@ public class BeneficiaryIndexDTO {
 	    public void setOutReferralTo(String outReferralTo) {
 	        this.outReferralTo = outReferralTo;
 	    }
+
+		public String getRemarks() {
+			return remarks;
+		}
+
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
+
+		public LocalDate getCreatedOn() {
+			return createdOn;
+		}
+
+		public void setCreatedOn(LocalDate createdOn) {
+			this.createdOn = createdOn;
+		}
+	    
+	    
 }

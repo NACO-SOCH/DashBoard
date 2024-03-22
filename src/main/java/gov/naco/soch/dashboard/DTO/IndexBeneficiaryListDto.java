@@ -5,13 +5,16 @@ package gov.naco.soch.dashboard.DTO;
 public class IndexBeneficiaryListDto {
 
 	private Long id;
-	private String uid;
-	private String BeneficiaryName;
-	private String genderName;
-	private String artNumber;
-	private Long totalIndexCount;
-	private Long indexReferredToICTC;
-	private Long indexAlreadyContacted;
+    private String uid;
+    private String BeneficiaryName;
+    private String genderName;
+    private String artNumber;
+    private String ostNumber;
+    private String dsrcCode;
+    private String pid;
+    private Long totalIndexCount;
+    private Long indexReferredToICTC;
+    private Long indexAlreadyContacted;
 
 	public Long getId() {
 		return id;
@@ -51,6 +54,32 @@ public class IndexBeneficiaryListDto {
 
 	public void setArtNumber(String artNumber) {
 		this.artNumber = artNumber;
+	}
+	
+	
+
+	public String getOstNumber() {
+		return ostNumber;
+	}
+
+	public void setOstNumber(String ostNumber) {
+		this.ostNumber = ostNumber;
+	}
+
+	public String getDsrcCode() {
+		return dsrcCode;
+	}
+
+	public void setDsrcCode(String dsrcCode) {
+		this.dsrcCode = dsrcCode;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	public Long getTotalIndexCount() {

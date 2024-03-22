@@ -11,6 +11,7 @@ public class BeneficiaryDTO {
 	    private String phoneNo;
 	    private Date screeningDate;
 	    private String status;
+	    private String relationType;
 	    
 	    
 		public Long getSskid() {
@@ -55,6 +56,14 @@ public class BeneficiaryDTO {
 		public void setStatus(String status) {
 			this.status = status;
 		}
+		public String getRelationType() {
+			return relationType;
+		}
+		public void setRelationType(String relationType) {
+			this.relationType = relationType;
+		}
+		
+		
 	    
 	    
 
